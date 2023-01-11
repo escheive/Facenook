@@ -1,0 +1,10 @@
+body .container-fluid {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  background: grey; }
+  body .container-fluid h1 {
+    padding: 20px;
+    background: pink; }
+
+/*# sourceMappingURL=main.css.map */
