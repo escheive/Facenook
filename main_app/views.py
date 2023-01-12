@@ -7,6 +7,8 @@ from .forms import SignUpForm
 
 
 
+# def homepage(request):
+#     return render(request, 'home.html')
 
 class Home(TemplateView):
     template_name = 'home.html'
