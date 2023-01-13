@@ -8,16 +8,31 @@ from .forms import SignUpForm
 
 
 
-def Home(request):
-    posts = Post.objects.all()
-    print(posts[1].content)
-    return render(request, 'home.html', { 'posts': posts })
+# def Home(request):
+#     posts = Post.objects.all()
+#     print(posts[1].content)
+#     return render(request, 'home.html', { 'posts': posts })
 
-# class Home(TemplateView):
-#     template_name = 'home.html'
+
+class Home(TemplateView):
+    template_name = 'home.html'
+
+    def get_queryset(self):
+        posts = Post.objects.all()
+        return posts
+
+    def get_context_data(self, **kwargs):
+        context = super(Home, self).get_context_data(**kwargs)
+        context['posts'] = Post.objects.all()
+        return context
+        
+
 
 class About(TemplateView):
     template_name = 'about.html'
+
+class Profile(TemplateView):
+    template_name = 'profile.html'
 
 
 def signup(request):
