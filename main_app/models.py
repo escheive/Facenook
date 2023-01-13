@@ -11,10 +11,10 @@ class Post(models.Model):
     date = models.DateField()
     content = models.CharField(max_length=250)
     comments = models.CharField(max_length=250)
-    likes = models.CharField(max_length=250)
+    likes = models.IntegerField()
 
     def __str__(self):
-        return self.user + self.content.truncatechars(5)
+        return str(self.user)
 
 # Create a profile model and link it to built-in django user model so that more info can be stored about the existing User model thats not related to authentication
 # Cited source at bottom

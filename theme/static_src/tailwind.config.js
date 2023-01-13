@@ -4,8 +4,13 @@
  * If you need the full config, get it from here:
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
+\
 
 module.exports = {
+    corePlugins: {
+        preflight: false,
+    },
+    prefix: 'tw-',
     content: [
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
@@ -18,7 +23,7 @@ module.exports = {
          * Main templates directory of the project (BASE_DIR/templates).
          * Adjust the following line to match your project structure.
          */
-        '../../templates/**/*.html',
+        '../../main_app/templates/**/*.html',
 
         /*
          * Templates in other django apps (BASE_DIR/<any_app_name>/templates).
@@ -39,7 +44,7 @@ module.exports = {
          * Python: If you use Tailwind CSS classes in Python, uncomment the following line
          * and make sure the pattern below matches your project structure.
          */
-        // '../../**/*.py'
+        '../../**/*.py'
     ],
     theme: {
         extend: {},

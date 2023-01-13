@@ -1,17 +1,20 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.base import TemplateView
-from .models import Post
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from .models import Post
 from .forms import SignUpForm
 
 
 
-# def homepage(request):
-#     return render(request, 'home.html')
+def Home(request):
+    posts = Post.objects.all()
+    print(posts[1].content)
+    return render(request, 'home.html', { 'posts': posts })
 
-class Home(TemplateView):
-    template_name = 'home.html'
+# class Home(TemplateView):
+#     template_name = 'home.html'
 
 class About(TemplateView):
     template_name = 'about.html'
