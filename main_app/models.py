@@ -20,11 +20,19 @@ class Post(models.Model):
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     follows = models.ManyToManyField(
-        "self",
-        related_name="followed_by",
-        symmetrical=False,
-        blank=True
+        "self", related_name="followed_by", symmetrical=False, blank=True
     )
+
+    def __str__(self):
+        return self.user.username
+
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        user_profile = Profile(user=instance)
+        user_profile .save()
+        user_profile.follows.add(instance.profile.id)
+        user_profile .save()
 
 # Create a profile model and link it to built-in django user model so that more info can be stored about the existing User model thats not related to authentication
 # Cited source at bottom
