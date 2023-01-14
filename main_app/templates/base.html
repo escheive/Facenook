@@ -19,7 +19,7 @@
         <ul class="right">
             {% if user.is_authenticated %}
             <li><a href="/">Home</a></li>
-            <li><a href="/profile/{{user.id}}">Profile</a></li>
+            <li><a href="/view_profile/{{user.id}}">Profile</a></li>
             <li><a href="/profile_list">All Profiles</a></li>
             <li><a href="/accounts/logout">Log Out</a></li>
             {% else %}

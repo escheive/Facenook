@@ -34,11 +34,24 @@ def profile_list(request):
 class About(TemplateView):
     template_name = 'about.html'
 
-class MyProfile(TemplateView):
-    template_name = 'my_profile.html'
+# class MyProfile(TemplateView):
+#     template_name = 'my_profile.html'
 
 def view_profile(request, pk):
+    if not hasattr(request.user, 'profile'):
+        missing_profile = Profile(user=request.user)
+        missing_profile.save()
+
     profile = Profile.objects.get(pk=pk)
+    if request.method == "POST":
+        current_user_profile = request.user.profile
+        data = request.POST
+        action = data.get("follow")
+        if action == "follow":
+            current_user_profile.follows.add(profile)
+        elif action == "unfollow":
+            current_user_profile.follows.remove(profile)
+        current_user_profile.save()
     return render(request, "view_profile.html", {"profile": profile})
 
 class CreatePost(CreateView):
@@ -63,7 +76,7 @@ def signup(request):
       user = form.save()
       # This is how we log a user in via code
       login(request, user)
-      return redirect('home')
+      return redirect('home.html')
     else:
       error_message = 'Invalid sign up - try again'
   # A GET or a bad POST request, so render signup.html with an empty form
