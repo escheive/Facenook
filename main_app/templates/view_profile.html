@@ -2,14 +2,61 @@
 
 {% block content %}
 
-<div>
-    
-    <ul>
-        {% for follower in profile.followed_by.all %}
-            <li>{{ follower }}</li>
-        {% endfor %}
-    </ul>
 
+
+<section class="tw-flex tw-justify-center">
+    <h1 class="tw-text-5xl">{{profile.user.username|upper}}'s Posts</h1>
+</section>
+
+
+<!-- <div class="tw-w-48 tw-text-sm tw-font-medium tw-text-gray-900 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-text-white">
+    <p href="#" aria-current="true" class="tw-block tw-w-full tw-px-4 tw-py-2 tw-text-black tw-border-b tw-border-gray-200 tw-rounded-t-lg tw-cursor-pointer dark:tw-bg-gray-800 dark:tw-border-gray-600">
+        Followers
+    </p>
+    <div class="tw-block tw-w-full tw-px-4 tw-py-2 tw-text-black tw-border-b tw-border-gray-200 tw-rounded-t-lg tw-cursor-pointer dark:tw-bg-gray-800 dark:tw-border-gray-600">
+        {% for follower in profile.followed_by.all %}
+        <a href="#" aria-current="true"> {{ follower }}</a>
+        {% endfor %}
+    </div>
+</div> -->
+
+<div class="tw-relative tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg">
+    <div class="tw-pb-4 tw-bg-white dark:tw-bg-gray-900">
+        <label for="table-search" class="tw-sr-only">Search</label>
+        <div class="tw-relative tw-mt-1">
+            <div class="tw-absolute tw-inset-y-0 tw-left-0 tw-flex tw-items-center tw-pl-3 tw-pointer-events-none">
+                <svg class="tw-w-5 tw-h-5 tw-text-gray-500 dark:tw-text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+            </div>
+            <input type="text" id="tw-table-search" class="tw-block tw-p-2 tw-pl-10 tw-text-sm tw-text-gray-900 tw-border tw-border-gray-300 tw-rounded-lg tw-w-80 tw-bg-gray-50 focus:tw-ring-blue-500 focus:tw-border-blue-500 dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-placeholder-gray-400 dark:tw-text-white dark:tw-focus:ring-blue-500 dark:tw-focus:border-blue-500" placeholder="Search for items">
+        </div>
+    </div>
+    <table class="tw-w-full tw-text-sm tw-text-left tw-text-gray-500 dark:tw-text-gray-400">
+        <thead class="tw-text-xs tw-text-gray-700 tw-uppercase tw-bg-gray-50 dark:tw-bg-gray-700 dark:tw-text-gray-400">
+            <tr>
+                <th scope="col" class="tw-px-6 tw-py-3">
+                    Followers
+                </th>
+                <th scope="col" class="tw-px-6 tw-py-3">
+                    Following
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 hover:tw-bg-gray-50 dark:hover:tw-bg-gray-600">
+                <th scope="row" class="tw-px-6 tw-py-4 tw-font-medium tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
+                    {% for follower in profile.followed_by.all %}
+                    <a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a>
+                    {% endfor %}
+                </th>
+                <th scope="row" class="tw-px-6 tw-py-4 tw-font-medium tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
+                    {% for following in profile.follows.all %}
+                    <a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a>
+                    {% endfor %}
+                </th>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
 
 {% endblock %}
