@@ -24,15 +24,7 @@ class Home(TemplateView):
         context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.all()
         return context
-        
-# class ProfileList(TemplateView):
-#     template_name = 'profile_list.html'
 
-#     def get_context_data(self, *args, **kwargs):
-#         context = super().get_context_data(*args, **kwargs)
-#         # context['profiles'] = Profile.objects.all()
-#         context['profiles'] = Profile.objects.exclude(profile_user=profile.user)
-#         return context
 
 def profile_list(request):
     profiles = Profile.objects.exclude(user=request.user)
@@ -42,8 +34,12 @@ def profile_list(request):
 class About(TemplateView):
     template_name = 'about.html'
 
-class ViewProfile(TemplateView):
-    template_name = 'view_profile.html'
+class MyProfile(TemplateView):
+    template_name = 'my_profile.html'
+
+def view_profile(request, pk):
+    profile = Profile.objects.get(pk=pk)
+    return render(request, "view_profile.html", {"profile": profile})
 
 class CreatePost(CreateView):
     model = Post 
