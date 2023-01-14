@@ -3,8 +3,6 @@ from django.contrib.auth.models import User, Group
 from .models import Post, Profile
 
 
-# Unregister the default django groups
-admin.site.unregister(Group)
 
 
 class ProfileInline(admin.StackedInline):
@@ -18,9 +16,11 @@ class UserAdmin(admin.ModelAdmin):
 
 
 
+
+# Unregister the default django groups
+admin.site.unregister(Group)
 # Unregister and re-register User to change what is displayed from Django's default settings
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 # Register your models here.
 admin.site.register(Post)
-# admin.site.register(Profile)

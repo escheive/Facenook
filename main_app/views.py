@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .models import Post
+from .models import Post, Profile
 from .forms import SignUpForm, PostForm
 
 
@@ -18,24 +18,31 @@ from .forms import SignUpForm, PostForm
 class Home(TemplateView):
     template_name = 'home.html'
 
-    def get_queryset(self):
-        posts = Post.objects.all()
-        return posts
-
     form = PostForm()
 
     def get_context_data(self, **kwargs):
-        context = super(Home, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['posts'] = Post.objects.all()
         return context
         
+class ProfileList(TemplateView):
+    template_name = 'profile_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['profiles'] = Profile.objects.all()
+        return context
+
+# def profile_list(request):
+#     profiles = Profile.objects.exclude(user=request.user)
+#     return render(request, "profile_list.html", {"profiles": profiles})
 
 
 class About(TemplateView):
     template_name = 'about.html'
 
-class Profile(TemplateView):
-    template_name = 'profile.html'
+class ViewProfile(TemplateView):
+    template_name = 'view_profile.html'
 
 class CreatePost(CreateView):
     model = Post 
