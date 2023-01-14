@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .models import Post
-from .forms import SignUpForm
+from .forms import SignUpForm, PostForm
 
 
 
@@ -21,6 +22,8 @@ class Home(TemplateView):
         posts = Post.objects.all()
         return posts
 
+    form = PostForm()
+
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
         context['posts'] = Post.objects.all()
@@ -34,6 +37,16 @@ class About(TemplateView):
 class Profile(TemplateView):
     template_name = 'profile.html'
 
+class CreatePost(CreateView):
+    model = Post 
+    fields = ['user', 'content']
+
+    def form_valid(self, form):
+        self.object = form.save(commit=False)
+        self.object.user = self.request.user
+        self.object.save()
+        return redirect('/')
+
 
 def signup(request):
   error_message = ''
@@ -46,7 +59,7 @@ def signup(request):
       user = form.save()
       # This is how we log a user in via code
       login(request, user)
-      return redirect('index')
+      return redirect('home')
     else:
       error_message = 'Invalid sign up - try again'
   # A GET or a bad POST request, so render signup.html with an empty form

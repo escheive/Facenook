@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from .models import Post
 
 class SignUpForm(UserCreationForm):
 
@@ -14,3 +16,10 @@ class SignUpForm(UserCreationForm):
 #     class Meta:
 #         model = Profile
 #         fields = 
+
+class PostForm(forms.ModelForm):
+    body = forms.CharField(required=True)
+
+    class Meta:
+        model = Post
+        exclude = ("user", )

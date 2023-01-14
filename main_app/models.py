@@ -16,6 +16,16 @@ class Post(models.Model):
     def __str__(self):
         return str(self.user)
 
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    follows = models.ManyToManyField(
+        "self",
+        related_name="followed_by",
+        symmetrical=False,
+        blank=True
+    )
+
 # Create a profile model and link it to built-in django user model so that more info can be stored about the existing User model thats not related to authentication
 # Cited source at bottom
 # class Profile(models.Model):

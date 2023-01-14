@@ -1,5 +1,25 @@
 from django.contrib import admin
-from .models import Post
+from django.contrib.auth.models import User, Group
+from .models import Post, Profile
 
+
+# Unregister the default django groups
+admin.site.unregister(Group)
+
+
+class ProfileInline(admin.StackedInline):
+    model = Profile
+
+class UserAdmin(admin.ModelAdmin):
+    model = User
+    # Only display the "username" field
+    fields = ["username"]
+    inlines = [ProfileInline]
+
+
+
+# Unregister and re-register User to change what is displayed from Django's default settings
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
 # Register your models here.
 admin.site.register(Post)

@@ -1,8 +1,12 @@
 # Facenook
 
 Citations
-https://v1.tailwindcss.com/components/cards
+# Used tailwind for my primary css needs
+https://v1.tailwindcss.com/
+# Flowbite is a library for tailwind
 https://flowbite.com/
+# For create post form
+https://realpython.com/django-social-forms-4/
 
 ## Wire Frames
 

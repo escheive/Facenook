@@ -37,13 +37,13 @@ INSTALLED_APPS = [
     # 'main_app.apps.MainAppConfig',
     # new scss attempt
     # 'compressor',
-    'main_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'main_app',
     # tailwind for css
     'tailwind',
     'theme',
