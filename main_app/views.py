@@ -25,17 +25,18 @@ class Home(TemplateView):
         context['posts'] = Post.objects.all()
         return context
         
-class ProfileList(TemplateView):
-    template_name = 'profile_list.html'
+# class ProfileList(TemplateView):
+#     template_name = 'profile_list.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['profiles'] = Profile.objects.all()
-        return context
+#     def get_context_data(self, *args, **kwargs):
+#         context = super().get_context_data(*args, **kwargs)
+#         # context['profiles'] = Profile.objects.all()
+#         context['profiles'] = Profile.objects.exclude(profile_user=profile.user)
+#         return context
 
-# def profile_list(request):
-#     profiles = Profile.objects.exclude(user=request.user)
-#     return render(request, "profile_list.html", {"profiles": profiles})
+def profile_list(request):
+    profiles = Profile.objects.exclude(user=request.user)
+    return render(request, "profile_list.html", {"profiles": profiles})
 
 
 class About(TemplateView):
