@@ -25,26 +25,18 @@ class Home(TemplateView):
         context['posts'] = Post.objects.all()
         return context
 
-# class Explore(TemplateView):
-#     template_name = 'explore.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['posts'] = Post.objects.all()
-#         return context
-
 def explore(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by("-created_at")
 
+    form = PostForm(request.POST or None)
     if request.method == "POST":
-        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.user = request.user
             post.save()
             return redirect('main_app:explore')
-    form = PostForm()
 
+    
     return render(request, 'explore.html', {'posts': posts, 'form': form})
 
 
