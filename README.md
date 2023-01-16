@@ -5,7 +5,7 @@ Citations
 https://v1.tailwindcss.com/
 # Flowbite is a library for tailwind
 https://flowbite.com/
-# For create post form
+# For social media site basics
 https://realpython.com/django-social-forms-4/
 
 ## Wire Frames
