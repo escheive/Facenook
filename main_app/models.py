@@ -9,7 +9,6 @@ from django.dispatch import receiver
 class Post(models.Model):
     user = models.ForeignKey(User, related_name="posts", on_delete=models.DO_NOTHING)
     content = models.CharField(max_length=140)
-    comments = models.CharField(max_length=250, null=True)
     likes = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -20,6 +19,18 @@ class Post(models.Model):
             f"{self.content[:30]}..."
         )
 
+class Comment(models.Model):
+    user = models.ForeignKey(User, related_name='comments', on_delete=models.DO_NOTHING)
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    content = models.CharField(max_length=140)
+    likes = models.IntegerField(null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['created_at']
+
+    def __str__(self):
+        return 'Comment {} by {}'.format(self.content, self.user)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

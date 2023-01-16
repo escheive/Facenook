@@ -22,7 +22,7 @@
 		</form>
         {% for post in posts %}
         <div class="flex justify-center">
-            <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <a href="{% url 'main_app:view_post' post.id %}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                     <div class="font-bold text-xl mb-2"> {{ post.user.username }}</div>
                     <p class="text-gray-700 text-base">
                         {{ post.content }}

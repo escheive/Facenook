@@ -44,6 +44,11 @@ def profile_list(request):
     profiles = Profile.objects.exclude(user=request.user)
     return render(request, "profile_list.html", {"profiles": profiles})
 
+def view_post(request, pk):
+    post = Post.objects.get(pk=pk)
+
+    return render(request, 'view_post.html', { 'post': post })
+
 
 class About(TemplateView):
     template_name = 'about.html'

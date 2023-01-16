@@ -42,7 +42,7 @@
     <div class="col-span-2">
         {% for post in profile.user.posts.all %}
         <div class="flex grow justify-center">
-            <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <a href="{% url 'main_app:view_post' post.id %}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 
                     <div class="font-bold text-xl mb-2">
                         <span class="mr-2 text-lg"> {{ post.user.username|capfirst }} </span> 
