@@ -14,9 +14,9 @@
         <script src="../../../../theme/static_src/node_modules/flowbite/dist/flowbite.min.js" defer></script>
         <title>Facenook</title>
     </head>
-  <body >
+  <body class="">
     <nav>
-        <ul class="right">
+        <ul class="tw-right">
             {% if user.is_authenticated %}
             <li><a href="/">Home</a></li>
             <li><a href="/view_profile/{{user.id}}">Profile</a></li>
@@ -29,7 +29,7 @@
         </ul>
     </nav>
     
-        <div class="container">
+        <div class="tw-px-4">
 
           {% block content %}{% endblock %}
 
