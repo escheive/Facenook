@@ -43,8 +43,12 @@
         {% for post in profile.user.posts.all %}
         <div class="tw-flex tw-grow tw-justify-center">
             <a href="#" class="tw-block tw-max-w-sm tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow-md hover:tw-bg-gray-100 dark:tw-bg-gray-800 dark:tw-border-gray-700 dark:hover:tw-bg-gray-700">
-                    <div class="tw-font-bold tw-text-xl tw-mb-2"> {{ post.user.username }}</div>
-                    <p class="tw-text-gray-700 tw-text-base">
+                
+                    <div class="tw-font-bold tw-text-xl tw-mb-2">
+                        <span class="tw-mr-2 tw-text-lg"> {{ post.user.username|capfirst }} </span> 
+                        <span class="tw-text-base"> {{ post.created_at }} </span>
+                    </div>
+                    <p class="tw-text-gray-700 tw-text-base tw-mb-4">
                         {{ post.content }}
                     </p>
                     <div>
@@ -55,10 +59,10 @@
     
                         <span><button class="tw-bg-white hover:tw-bg-gray-100 tw-text-gray-800 tw-font-semibold tw-py-2 tw-px-4 tw-border tw-border-gray-400 tw-rounded tw-shadow">❤️ {{ post.likes }}</button></span>
                     </div>
-                <div class="tw-px-6 tw-pt-4 tw-pb-2">
-                <span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-2 tw-mb-2">#photography</span>
-                <span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-2 tw-mb-2">#travel</span>
-                <span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-2 tw-mb-2">#winter</span>
+                <div class="tw-px-6 tw-pt-4 tw-pb-2 tw-flex tw-flex-row">
+                    <span class="tw-w-fit tw-inline-block tw-bg-gray-200 tw-rounded-full tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-1 tw-px-1 tw-mb-2">#photography</span>
+                    <span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-1 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-1 tw-px-1 tw-ml-1 tw-mb-2">#travel</span>
+                    <span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-1 tw-px-1 tw-ml-1 tw-mb-2">#winter</span>
                 </div>
             </a>
         </div>
