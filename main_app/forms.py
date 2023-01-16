@@ -18,8 +18,18 @@ class SignUpForm(UserCreationForm):
 #         fields = 
 
 class PostForm(forms.ModelForm):
-    body = forms.CharField(required=True)
+    content = forms.CharField(
+        required=True,
+        widget=forms.widgets.Textarea(
+            attrs={
+                'placeholder': 'Write your thoughts',
+                'class': 'w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
+            }
+        ),
+        label=""
+    )
 
     class Meta:
         model = Post
+        fields = ('content', )
         exclude = ("user", )

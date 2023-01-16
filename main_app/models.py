@@ -9,8 +9,8 @@ from django.dispatch import receiver
 class Post(models.Model):
     user = models.ForeignKey(User, related_name="posts", on_delete=models.DO_NOTHING)
     content = models.CharField(max_length=140)
-    comments = models.CharField(max_length=250)
-    likes = models.IntegerField()
+    comments = models.CharField(max_length=250, null=True)
+    likes = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
