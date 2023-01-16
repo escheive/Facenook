@@ -8,22 +8,22 @@ from .models import Post, Profile
 from .forms import SignUpForm, PostForm
 
 
+def home(request):
+    followed_posts = Post.objects.filter(
+        user__profile__in=request.user.profile.follows.all()
+    ).order_by("-created_at")
 
-# def Home(request):
-#     posts = Post.objects.all()
-#     print(posts[1].content)
-#     return render(request, 'home.html', { 'posts': posts })
+    form = PostForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('main_app:explore')
 
+    
+    return render(request, 'home.html', {'posts': followed_posts, 'form': form})
 
-class Home(TemplateView):
-    template_name = 'home.html'
-
-    form = PostForm()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.all()
-        return context
 
 def explore(request):
     posts = Post.objects.all().order_by("-created_at")
