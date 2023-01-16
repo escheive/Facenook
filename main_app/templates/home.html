@@ -2,46 +2,48 @@
 
 {% block content %}
 
-	<div class="tw-container tw-mx-auto">
+	<div class="container mx-auto">
 	
-		<section class="tw-flex tw-justify-center tw-mb-8">
-			<h1 class="tw-text-5xl">Facenook ❤️</h1>
+		<section class="flex justify-center mb-8">
+			<h1 class="text-5xl">Home ❤️</h1>
 		</section>
-		<form class="tw-flex tw-justify-center tw-mb-8">
-			<div class="tw-w-full tw-max-w-sm tw-border tw-border-gray-200 tw-rounded-lg tw-bg-gray-50 dark:tw-bg-gray-700 dark:tw-border-gray-600">
-				<div class="tw-px-4 tw-py-2 tw-bg-white tw-rounded-t-lg dark:tw-bg-gray-800">
-					<textarea id="comment" rows="4" class="tw-w-full tw-px-0 tw-text-sm tw-text-gray-900 tw-bg-white tw-border-0 dark:tw-bg-gray-800 focus:tw-ring-0 dark:tw-text-white dark:tw-placeholder-gray-400" placeholder="Write your post here..." required></textarea>
+		<form class="flex justify-center mb-8">
+			<div class="w-full max-w-sm border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+				<div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
+					<textarea id="comment" rows="4" class="w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Write your post here..." required></textarea>
 				</div>
-				<div class="tw-flex tw-items-center tw-justify-between tw-px-3 tw-py-2 tw-border-t dark:tw-border-gray-600">
-					<button type="submit" class="tw-inline-flex tw-items-center tw-py-2.5 tw-px-4 tw-text-xs tw-font-medium tw-text-center tw-text-white tw-bg-blue-700 tw-rounded-lg focus:tw-ring-4 focus:tw-ring-blue-200 dark:focus:tw-ring-blue-900 hover:tw-bg-blue-800">
+				<div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+					<button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
 						Post
 					</button>
 				</div>
 			</div>
 		</form>
-		{% for post in posts %}
-		<div class="tw-flex tw-justify-center">
-			<a href="#" class="tw-block tw-max-w-sm tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow-md hover:tw-bg-gray-100 dark:tw-bg-gray-800 dark:tw-border-gray-700 dark:hover:tw-bg-gray-700">
-					<div class="tw-font-bold tw-text-xl tw-mb-2"> {{ post.user.username }}</div>
-					<p class="tw-text-gray-700 tw-text-base">
-						{{ post.content }}
-					</p>
-					<div>
-						<span><button class="tw-bg-white hover:tw-bg-gray-100 tw-text-gray-800 tw-font-semibold tw-py-2 tw-px-4 tw-border tw-border-gray-400 tw-rounded tw-shadow">
-							<svg class="tw-w-6 tw-h-5 tw-mr-2 tw--ml-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"></path></svg>
-								{{ post.comments|length }}
-						</button></span>
-	
-						<span><button class="tw-bg-white hover:tw-bg-gray-100 tw-text-gray-800 tw-font-semibold tw-py-2 tw-px-4 tw-border tw-border-gray-400 tw-rounded tw-shadow">❤️ {{ post.likes }}</button></span>
-					</div>
-				<div class="tw-px-6 tw-pt-4 tw-pb-2">
-				<span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-2 tw-mb-2">#photography</span>
-				<span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-2 tw-mb-2">#travel</span>
-				<span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-2 tw-mb-2">#winter</span>
-				</div>
-			</a>
-		</div>
-		{% endfor %}
+        {% for followed in user.profile.follows.all %}
+            {% for post in followed.user.posts.all %}
+            <div class="flex justify-center">
+                <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <div class="font-bold text-xl mb-2"> {{ post.user.username }}</div>
+                        <p class="text-gray-700 text-base">
+                            {{ post.content }}
+                        </p>
+                        <div>
+                            <span><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                                <svg class="w-6 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"></path></svg>
+                                    {{ post.comments|length }}
+                            </button></span>
+        
+                            <span><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">❤️ {{ post.likes }}</button></span>
+                        </div>
+                    <div class="px-6 pt-4 pb-2">
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        {% endfor %}
 	</div>
 
 {% endblock %}

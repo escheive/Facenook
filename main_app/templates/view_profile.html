@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<div class="tw-flex tw-flex-col tw-justify-center tw-items-center">
-    <h1 class="tw-text-5xl">{{ profile.user.username|upper }}'s Page</h1>
+<div class="flex flex-col justify-center items-center">
+    <h1 class="text-5xl">{{ profile.user.username|upper }}'s Page</h1>
     <h2> {{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
     <h2> {{ profile.user.email }}</h2>
 </div>
@@ -11,89 +11,89 @@
 {% if request.user.profile.id != profile.id %}
     <form method="post">
         {% csrf_token %}
-        <div class="tw-flex tw-justify-center">
+        <div class="flex justify-center">
             {% if profile in user.profile.follows.all %}
-                <button type="submit" class="tw-text-gray-900 hover:tw-text-white tw-border tw-border-gray-800 hover:tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-gray-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-border-gray-600 dark:tw-text-gray-400 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:tw-ring-gray-800 tw-cursor-not-allowed" disabled>Follow</button>
-                <button type="submit" class="tw-text-gray-900 hover:tw-text-white tw-border tw-border-gray-800 hover:tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-gray-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-border-gray-600 dark:tw-text-gray-400 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:tw-ring-gray-800" name="follow" value="unfollow">Unfollow</button>
+                <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 cursor-not-allowed" disabled>Follow</button>
+                <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" name="follow" value="unfollow">Unfollow</button>
             {% else %}
-                <button type="submit" class="tw-text-gray-900 hover:tw-text-white tw-border tw-border-gray-800 hover:tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-gray-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-border-gray-600 dark:tw-text-gray-400 dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:tw-ring-gray-800" name="follow" value="follow">Follow</button>
-                <button type="submit" class="tw-text-white tw-bg-gray-900 dark:tw-bg-white hover:tw-text-white tw-border tw-border-gray-800 hover:tw-bg-gray-900 focus:tw-ring-4 focus:tw-outline-none focus:tw-ring-gray-300 tw-font-medium tw-rounded-lg tw-text-sm tw-px-5 tw-py-2.5 tw-text-center tw-mr-2 tw-mb-2 dark:tw-border-gray-600 dark:tw-text-white dark:hover:tw-text-white dark:hover:tw-bg-gray-600 dark:focus:tw-ring-gray-800 tw-cursor-not-allowed" disabled>Unfollow</button>
+                <button type="submit" class="text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800" name="follow" value="follow">Follow</button>
+                <button type="submit" class="text-white bg-gray-900 dark:bg-white hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-white dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800 cursor-not-allowed" disabled>Unfollow</button>
             {% endif %}
         </div>
     </form>
 {% endif %}
 
 
-<!-- <div class="tw-w-48 tw-text-sm tw-font-medium tw-text-gray-900 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg dark:tw-bg-gray-700 dark:tw-border-gray-600 dark:tw-text-white">
-    <p href="#" aria-current="true" class="tw-block tw-w-full tw-px-4 tw-py-2 tw-text-black tw-border-b tw-border-gray-200 tw-rounded-t-lg tw-cursor-pointer dark:tw-bg-gray-800 dark:tw-border-gray-600">
+<!-- <div class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+    <p href="#" aria-current="true" class="block w-full px-4 py-2 text-black border-b border-gray-200 rounded-t-lg cursor-pointer dark:bg-gray-800 dark:border-gray-600">
         Followers
     </p>
-    <div class="tw-block tw-w-full tw-px-4 tw-py-2 tw-text-black tw-border-b tw-border-gray-200 tw-rounded-t-lg tw-cursor-pointer dark:tw-bg-gray-800 dark:tw-border-gray-600">
+    <div class="block w-full px-4 py-2 text-black border-b border-gray-200 rounded-t-lg cursor-pointer dark:bg-gray-800 dark:border-gray-600">
         {% for follower in profile.followed_by.all %}
         <a href="#" aria-current="true"> {{ follower }}</a>
         {% endfor %}
     </div>
 </div> -->
 
-<div class="tw-h56 tw-py-4 tw-flex tw-grid tw-grid-cols-4 tw-gap-1 tw-items-stretch">
-    <div class="tw-grow">
+<div class="h56 py-4 flex grid grid-cols-4 gap-1 items-stretch">
+    <div class="grow">
         <h1>This will be nav</h1>
     </div>
-    <div class="tw-col-span-2">
+    <div class="col-span-2">
         {% for post in profile.user.posts.all %}
-        <div class="tw-flex tw-grow tw-justify-center">
-            <a href="#" class="tw-block tw-max-w-sm tw-p-6 tw-bg-white tw-border tw-border-gray-200 tw-rounded-lg tw-shadow-md hover:tw-bg-gray-100 dark:tw-bg-gray-800 dark:tw-border-gray-700 dark:hover:tw-bg-gray-700">
+        <div class="flex grow justify-center">
+            <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 
-                    <div class="tw-font-bold tw-text-xl tw-mb-2">
-                        <span class="tw-mr-2 tw-text-lg"> {{ post.user.username|capfirst }} </span> 
-                        <span class="tw-text-base"> {{ post.created_at }} </span>
+                    <div class="font-bold text-xl mb-2">
+                        <span class="mr-2 text-lg"> {{ post.user.username|capfirst }} </span> 
+                        <span class="text-base"> {{ post.created_at }} </span>
                     </div>
-                    <p class="tw-text-gray-700 tw-text-base tw-mb-4">
+                    <p class="text-gray-700 text-base mb-4">
                         {{ post.content }}
                     </p>
                     <div>
-                        <span><button class="tw-bg-white hover:tw-bg-gray-100 tw-text-gray-800 tw-font-semibold tw-py-2 tw-px-4 tw-border tw-border-gray-400 tw-rounded tw-shadow">
-                            <svg class="tw-w-6 tw-h-5 tw-mr-2 tw--ml-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"></path></svg>
+                        <span><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                            <svg class="w-6 h-5 mr-2 -ml-1" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"></path></svg>
                                 {{ post.comments|length }}
                         </button></span>
     
-                        <span><button class="tw-bg-white hover:tw-bg-gray-100 tw-text-gray-800 tw-font-semibold tw-py-2 tw-px-4 tw-border tw-border-gray-400 tw-rounded tw-shadow">❤️ {{ post.likes }}</button></span>
+                        <span><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">❤️ {{ post.likes }}</button></span>
                     </div>
-                <div class="tw-px-6 tw-pt-4 tw-pb-2 tw-flex tw-flex-row">
-                    <span class="tw-w-fit tw-inline-block tw-bg-gray-200 tw-rounded-full tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-1 tw-px-1 tw-mb-2">#photography</span>
-                    <span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-1 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-1 tw-px-1 tw-ml-1 tw-mb-2">#travel</span>
-                    <span class="tw-inline-block tw-bg-gray-200 tw-rounded-full tw-px-3 tw-py-1 tw-text-sm tw-font-semibold tw-text-gray-700 tw-mr-1 tw-px-1 tw-ml-1 tw-mb-2">#winter</span>
+                <div class="px-6 pt-4 pb-2 flex flex-row">
+                    <span class="w-fit inline-block bg-gray-200 rounded-full py-1 text-sm font-semibold text-gray-700 mr-1 px-1 mb-2">#photography</span>
+                    <span class="inline-block bg-gray-200 rounded-full px-1 py-1 text-sm font-semibold text-gray-700 mr-1 px-1 ml-1 mb-2">#travel</span>
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 px-1 ml-1 mb-2">#winter</span>
                 </div>
             </a>
         </div>
         {% endfor %}
     </div>
-    <div class="tw-relative tw-h-fit tw-flex tw-overflow-x-auto tw-shadow-md sm:tw-rounded-lg">
-        <table class="tw-w-full tw-table-auto tw-text-sm tw-text-center tw-text-gray-500 dark:tw-text-gray-400">
-            <thead class="tw-text-xs tw-text-gray-700 tw-uppercase dark:tw-bg-gray-700 dark:tw-text-gray-400">
+    <div class="relative h-fit flex overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full table-auto text-sm text-center text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="tw-px-6 tw-bg-gray-50 tw-py-4 tw-rounded-l-lg tw-p-6 tw-space-y-3">
+                    <th scope="col" class="px-6 bg-gray-50 py-4 rounded-l-lg p-6 space-y-3">
                         Followers
                     </th>
-                    <th scope="col" class="tw-px-6 tw-bg-gray-50 tw-py-4 tw-rounded-r-lg tw-p-6 tw-space-y-3">
-                        <!-- <th scope="col" class="tw-px-6 tw-py-3"> -->
+                    <th scope="col" class="px-6 bg-gray-50 py-4 rounded-r-lg p-6 space-y-3">
+                        <!-- <th scope="col" class="px-6 py-3"> -->
                         Following
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="tw-bg-white tw-border-b dark:tw-bg-gray-800 dark:tw-border-gray-700 tw-bg-gray-50 dark:hover:tw-bg-gray-600">
-                    <th scope="row" class="tw-px-6 tw-py-4 tw-font-medium tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
-                        <ul class="tw-px-6 tw-py-3">
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 bg-gray-50 dark:hover:bg-gray-600">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <ul class="px-6 py-3">
                             {% for follower in profile.followed_by.all %}
-                            <li class="tw-group tw-mx-auto tw-rounded-lg tw-p-6 tw-space-y-3 hover:tw-bg-gray-200 hover:tw-ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
+                            <li class="group mx-auto rounded-lg p-6 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
                             {% endfor %}
                         </ul>
                     </th>
-                    <th scope="row" class="tw-px-6 tw-py-4 tw-font-medium tw-text-gray-900 tw-whitespace-nowrap dark:tw-text-white">
-                        <ul class="tw-px-6 tw-py-3">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <ul class="px-6 py-3">
                             {% for following in profile.follows.all %}
-                            <li class="tw-group tw-mx-auto tw-rounded-lg tw-p-6 tw-space-y-3 hover:tw-bg-gray-200 hover:tw-ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
+                            <li class="group mx-auto rounded-lg p-6 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
                             {% endfor %}
                         </ul>
                     </th>

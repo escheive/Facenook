@@ -25,6 +25,16 @@ class Home(TemplateView):
         context['posts'] = Post.objects.all()
         return context
 
+class Explore(TemplateView):
+    template_name = 'explore.html'
+
+    form = PostForm()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.all()
+        return context
+
 
 def profile_list(request):
     profiles = Profile.objects.exclude(user=request.user)
