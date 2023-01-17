@@ -5,7 +5,7 @@
 <div class="py-4">
     
     <div class="flex justify-center">
-        <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <a href="#" class="block w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
             <div class="font-bold text-xl mb-2">
                 <span class="mr-2 text-lg"> {{ post.user.username|capfirst }} </span> 
                 <span class="text-base"> {{ post.created_at }} </span>
@@ -29,7 +29,7 @@
     </div>
     <form method="post" class="flex justify-center h-fit">
         {% csrf_token %}
-        <div class="form-group w-full max-w-sm border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+        <div class="form-group w-full w-1/2 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
             <div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
                 {{ form.content }}
                 {{ form.parent.as_hidden }}
@@ -43,8 +43,11 @@
     </form>
     {% for comment in comments %}
         <div class="flex justify-center">
-            <a href="{% url 'main_app:view_comment' comment.id %}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <div class="font-bold text-xl mb-2"> {{ comment.user.username }}</div>
+            <a href="{% url 'main_app:view_comment' comment.id %}" class="block w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <div class="font-bold text-xl mb-2">
+					<span class="mr-2 text-lg"> {{ comment.user.username|capfirst }} </span> 
+					<span class="text-base"> {{ comment.created_at }} </span>
+				</div>
                 <p class="text-gray-700 text-base">
                     {{ comment.content }}
                 </p>
