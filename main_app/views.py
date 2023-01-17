@@ -46,6 +46,7 @@ def profile_list(request):
 
 def view_post(request, pk):
     post = Post.objects.get(pk=pk)
+    comments = post.comments.all()
 
     return render(request, 'view_post.html', { 'post': post })
 
@@ -61,7 +62,10 @@ def view_profile(request, pk):
         missing_profile = Profile(user=request.user)
         missing_profile.save()
 
+
     profile = Profile.objects.get(pk=pk)
+    user_posts = Post.objects.filter(user=profile.user).order_by('-created_at')
+
     if request.method == "POST":
         current_user_profile = request.user.profile
         data = request.POST
@@ -71,7 +75,16 @@ def view_profile(request, pk):
         elif action == "unfollow":
             current_user_profile.follows.remove(profile)
         current_user_profile.save()
-    return render(request, "view_profile.html", {"profile": profile})
+
+    form = PostForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user = request.user
+            post.save()
+            return redirect('main_app:view_profile', pk=profile.id)
+
+    return render(request, "view_profile.html", {"profile": profile, 'form': form, 'user_posts': user_posts})
 
 class CreatePost(CreateView):
     model = Post 

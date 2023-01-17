@@ -23,24 +23,24 @@
     </form>
 {% endif %}
 
+<div class="py-4 grid grid-cols-4">
 
-<!-- <div class="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-    <p href="#" aria-current="true" class="block w-full px-4 py-2 text-black border-b border-gray-200 rounded-t-lg cursor-pointer dark:bg-gray-800 dark:border-gray-600">
-        Followers
-    </p>
-    <div class="block w-full px-4 py-2 text-black border-b border-gray-200 rounded-t-lg cursor-pointer dark:bg-gray-800 dark:border-gray-600">
-        {% for follower in profile.followed_by.all %}
-        <a href="#" aria-current="true"> {{ follower }}</a>
-        {% endfor %}
-    </div>
-</div> -->
+    <form method="post" class="flex justify-center h-fit">
+        {% csrf_token %}
+        <div class="w-full max-w-sm border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+            <div class="px-4 py-4 bg-white rounded-t-lg dark:bg-gray-800">
+                {{ form.as_p }}
+            </div>
+            <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+                <button type="submit" class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                    Post
+                </button>
+            </div>
+        </div>
+    </form>
 
-<div class="h56 py-4 flex grid grid-cols-4 gap-1 items-stretch">
-    <div class="grow">
-        <h1>This will be nav</h1>
-    </div>
     <div class="col-span-2">
-        {% for post in profile.user.posts.all %}
+        {% for post in user_posts %}
         <div class="flex grow justify-center">
             <a href="{% url 'main_app:view_post' post.id %}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 
