@@ -44,7 +44,4 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('content', 'parent')
-        labels = {
-            'content': _(''),
-        }
         exclude = ("user", )

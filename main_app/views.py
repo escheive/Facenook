@@ -49,13 +49,32 @@ def profile_list(request):
 def view_post(request, pk):
     post = Post.objects.get(pk=pk)
     comments = Comment.objects.filter(post=post.id)
+
     form = CommentForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.post = post
+            comment.save()
+            return redirect('main_app:view_post', pk=post.id)
 
     return render(request, 'view_post.html', { 'post': post, 'comments': comments, 'form': form })
 
 def view_comment(request, pk):
     comment = Comment.objects.get(pk=pk)
+
     form = CommentForm(request.POST or None)
+    if request.method == 'POST':
+        print('-------------------------------------------------------------------------------Reached here')
+        if form.is_valid():
+           
+
+            comment.user = request.user
+            comment = form.save(commit=False)
+            comment.save()
+            return redirect('view_post.html')
+
 
     return render(request, 'view_comment.html', { 'comment': comment, 'form': form })
 

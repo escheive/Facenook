@@ -54,6 +54,12 @@
                     <span><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">❤️ {{ comment.likes }}</button></span>
                 </div>
             </a>
+            <form action="" method="POST" id="main_form" class="comment_form">
+                <div>
+                    &nbsp; &nbsp; &nbsp;<label for="comment">Reply here</label>
+                   &nbsp; &nbsp; &nbsp;<input type="text" name="content"> <input type="hidden" value="{{ comment.pk }}" name="parent"> {% csrf_token %} <input type="submit" value="Post"></div>
+                </div>
+             </form>
         </div>
         {% endif %}
         {% for replies in comment.children %}
