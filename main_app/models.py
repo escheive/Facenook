@@ -19,18 +19,34 @@ class Post(models.Model):
             f"{self.content[:30]}..."
         )
 
+
+
+
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name='comments', on_delete=models.DO_NOTHING)
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+    parent = models.ForeignKey('self' , null=True , blank=True , on_delete=models.CASCADE , related_name='replies')
     content = models.CharField(max_length=140)
     likes = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['created_at']
+        ordering = ['-created_at']
 
     def __str__(self):
         return 'Comment {} by {}'.format(self.content, self.user)
+
+    @property
+    def children(self):
+        return Comment.objects.filter(parent=self).reverse()
+
+    @property
+    def is_parent(self):
+        if self.parent is None:
+            return True
+        return False
+
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -41,6 +57,10 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+
+
+
+
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
@@ -49,22 +69,6 @@ def create_profile(sender, instance, created, **kwargs):
         user_profile.follows.add(instance.profile)
         user_profile.save()
 
-# Create a profile model and link it to built-in django user model so that more info can be stored about the existing User model thats not related to authentication
-# Cited source at bottom
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     bio = models.TextField(max_length=500, blank=True)
-#     location = models.CharField(max_length=30, blank=True)
-#     birth_date = models.DateField(null=True, blank=True)
-
-# @receiver(post_save, sender=User)
-# def create_user_profile(sender, instance, created, **kwargs):
-#     if created:
-#         Profile.objects.create(user=instance)
-
-# @receiver(post_save, sender=User)
-# def save_user_profile(sender, instance, **kwargs):
-#     instance.profile.save()
 
 # Profile model was created based on tutorial from this site:
 # https://simpleisbetterthancomplex.com/tutorial/2016/07/22/how-to-extend-django-user-model.html#onetoone

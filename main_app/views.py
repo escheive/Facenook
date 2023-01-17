@@ -4,10 +4,11 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
-from .models import Post, Profile
-from .forms import SignUpForm, PostForm
+from .models import Post, Profile, Comment
+from .forms import SignUpForm, PostForm, CommentForm
 
 
+@login_required
 def home(request):
     followed_posts = Post.objects.filter(
         user__profile__in=request.user.profile.follows.all()
@@ -19,10 +20,10 @@ def home(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            return redirect('main_app:explore')
+            return redirect('main_app:home')
 
     
-    return render(request, 'home.html', {'posts': followed_posts, 'form': form})
+    return render(request, 'home.html', {'posts': followed_posts, 'form': form })
 
 
 def explore(request):
@@ -42,13 +43,21 @@ def explore(request):
 
 def profile_list(request):
     profiles = Profile.objects.exclude(user=request.user)
+
     return render(request, "profile_list.html", {"profiles": profiles})
 
 def view_post(request, pk):
     post = Post.objects.get(pk=pk)
-    comments = post.comments.all()
+    comments = Comment.objects.filter(post=post.id)
+    form = CommentForm(request.POST or None)
 
-    return render(request, 'view_post.html', { 'post': post })
+    return render(request, 'view_post.html', { 'post': post, 'comments': comments, 'form': form })
+
+def view_comment(request, pk):
+    comment = Comment.objects.get(pk=pk)
+    form = CommentForm(request.POST or None)
+
+    return render(request, 'view_comment.html', { 'comment': comment, 'form': form })
 
 
 class About(TemplateView):
@@ -108,7 +117,7 @@ def signup(request):
       user = form.save()
       # This is how we log a user in via code
       login(request, user)
-      return redirect('home.html')
+      return redirect('dashboard.html')
     else:
       error_message = 'Invalid sign up - try again'
   # A GET or a bad POST request, so render signup.html with an empty form

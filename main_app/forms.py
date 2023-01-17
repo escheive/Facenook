@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.utils.translation import gettext_lazy as _
 from django import forms
 from .models import Post, Comment
 
@@ -34,7 +35,7 @@ class CommentForm(forms.ModelForm):
         widget=forms.widgets.Textarea(
             attrs={
                 'placeholder': 'Write your thoughts',
-                'class': 'w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
+                'class': 'form-control w-full px-0 text-sm text-gray-900 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400'
             }
         ),
         label=""
@@ -42,5 +43,8 @@ class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('content', )
+        fields = ('content', 'parent')
+        labels = {
+            'content': _(''),
+        }
         exclude = ("user", )

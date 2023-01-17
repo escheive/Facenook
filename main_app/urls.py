@@ -11,6 +11,7 @@ urlpatterns = [
     path('view_post/<int:pk>/', views.view_post, name='view_post'),
     path('about/', views.About.as_view(), name='about'),
     path('accounts/signup/', views.signup, name='signup'),
+    path('view_comment/<int:pk>/', views.view_comment, name='view_comment'),
     path('post/', views.CreatePost.as_view(), name='create'),
     path('explore/', views.explore, name='explore')
 ]

@@ -7,6 +7,8 @@ https://v1.tailwindcss.com/
 https://flowbite.com/
 # For social media site basics
 https://realpython.com/django-social-forms-4/
+# For help with making a comment reply section
+https://focusustech.com/blog/create-a-comment-and-reply-system-in-django
 
 ## Wire Frames
 
