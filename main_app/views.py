@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -57,9 +57,18 @@ def view_post(request, pk):
             comment.user = request.user
             comment.post = post
             comment.save()
-            return redirect('main_app:view_post', pk=post.id)
+            return render('main_app:view_post', pk=post.id)
 
     return render(request, 'view_post.html', { 'post': post, 'comments': comments, 'form': form })
+
+def delete_post(request, pk):
+    context = {}
+    post = Post.objects.get(pk=pk)
+    if request.method == "POST":
+        post.delete()
+        return redirect('main_app:view_profile', pk=request.user.id)
+
+    return render(request, 'delete_post.html')
 
 def view_comment(request, pk):
     comment = Comment.objects.get(pk=pk)
@@ -81,9 +90,6 @@ def view_comment(request, pk):
 
 class About(TemplateView):
     template_name = 'about.html'
-
-# class MyProfile(TemplateView):
-#     template_name = 'my_profile.html'
 
 def view_profile(request, pk):
     if not hasattr(request.user, 'profile'):
@@ -113,6 +119,13 @@ def view_profile(request, pk):
             return redirect('main_app:view_profile', pk=profile.id)
 
     return render(request, "view_profile.html", {"profile": profile, 'form': form, 'user_posts': user_posts})
+
+def edit_profile(request, pk):
+
+    profile = Profile.objects.get(pk=pk)
+    user_posts = Post.objects.filter(user=profile.user).order_by('-created_at')
+
+    return render(request, "edit_profile.html", {"profile": profile, 'user_posts': user_posts})
 
 class CreatePost(CreateView):
     model = Post 

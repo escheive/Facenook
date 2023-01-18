@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     # 'sass_processor',
     # 'main_app.apps.MainAppConfig',
     # new scss attempt
-    # 'compressor',
+    'compressor',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = '/main_app/static/'
+STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -145,22 +145,12 @@ LOGOUT_REDIRECT_URL = '/'
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    # 'compressor.finders.CompressorFinder',
+    'compressor.finders.CompressorFinder',
 ]
 
-# Django Sass old attempt
-# SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR,'static')
+COMPRESS_ROOT = BASE_DIR/'static'
 
-# new scss attempt
-
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, "main_app/static/styles/"),
-# )
-# STATIC_ROOT = os.path.join(BASE_DIR, 'main_app/static/')
-
-# COMPRESS_PRECOMPILERS = (
-#     ('text/x-scss', 'django_libsass.SassCompiler'),
-# )
+COMPRESS_ENABLED = True
 
 # for tailwind
 TAILWIND_APP_NAME = 'theme'
