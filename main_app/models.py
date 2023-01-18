@@ -20,8 +20,6 @@ class Post(models.Model):
         )
 
 
-
-
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name='comments', on_delete=models.DO_NOTHING)
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
@@ -47,7 +45,6 @@ class Comment(models.Model):
         return False
 
 
-
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     follows = models.ManyToManyField(
@@ -56,9 +53,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-
-
 
 
 @receiver(post_save, sender=User)

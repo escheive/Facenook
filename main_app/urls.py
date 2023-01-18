@@ -15,5 +15,5 @@ urlpatterns = [
     path('view_comment/<int:pk>/', views.view_comment, name='view_comment'),
     path('post/', views.CreatePost.as_view(), name='create'),
     path('delete_post/<int:pk>/', views.delete_post, name='delete'),
-    path('explore/', views.explore, name='explore'),
+    path('dashboard/', views.dashboard, name='dashboard'),
 ]

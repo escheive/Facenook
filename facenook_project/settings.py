@@ -32,10 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    # old scss attempt
-    # 'sass_processor',
-    # 'main_app.apps.MainAppConfig',
-    # new scss attempt
     'compressor',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -44,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main_app',
-    # tailwind for css
     'tailwind',
     'theme',
     'django_browser_reload',
@@ -137,7 +132,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # specify where logging out redirects you
-LOGIN_REDIRECT_URL = 'dashboard/'
+LOGIN_REDIRECT_URL = '/'
 
 LOGOUT_REDIRECT_URL = '/'
 

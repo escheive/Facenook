@@ -2,14 +2,15 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from .models import Post, Profile, Comment
-from .forms import SignUpForm, PostForm, CommentForm
+from .forms import SignUpForm, PostForm, CommentForm, EditUserForm
 
 
 @login_required
-def home(request):
+def dashboard(request):
     followed_posts = Post.objects.filter(
         user__profile__in=request.user.profile.follows.all()
     ).order_by("-created_at")
@@ -23,10 +24,12 @@ def home(request):
             return redirect('main_app:home')
 
     
-    return render(request, 'home.html', {'posts': followed_posts, 'form': form })
+    return render(request, 'dashboard.html', {'posts': followed_posts, 'form': form })
 
 
-def explore(request):
+
+
+def home(request):
     posts = Post.objects.all().order_by("-created_at")
 
     form = PostForm(request.POST or None)
@@ -38,7 +41,7 @@ def explore(request):
             return redirect('main_app:explore')
 
     
-    return render(request, 'explore.html', {'posts': posts, 'form': form})
+    return render(request, 'home.html', {'posts': posts, 'form': form})
 
 
 def profile_list(request):
@@ -125,7 +128,14 @@ def edit_profile(request, pk):
     profile = Profile.objects.get(pk=pk)
     user_posts = Post.objects.filter(user=profile.user).order_by('-created_at')
 
-    return render(request, "edit_profile.html", {"profile": profile, 'user_posts': user_posts})
+    form = EditUserForm()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile is updated successfully')
+            return redirect(to='users-profile')
+
+    return render(request, "edit_profile.html", {"profile": profile, 'user_posts': user_posts, 'form': form})
 
 class CreatePost(CreateView):
     model = Post 
@@ -149,7 +159,7 @@ def signup(request):
       user = form.save()
       # This is how we log a user in via code
       login(request, user)
-      return redirect('dashboard.html')
+      return redirect('{% url main_app:dashboard.html %}')
     else:
       error_message = 'Invalid sign up - try again'
   # A GET or a bad POST request, so render signup.html with an empty form

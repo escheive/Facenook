@@ -2,13 +2,57 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.utils.translation import gettext_lazy as _
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, Profile
 
 class SignUpForm(UserCreationForm):
 
     class Meta:
         model = get_user_model()
         fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
+
+class EditUserForm(forms.ModelForm):
+
+    username = forms.CharField(
+        max_length=100, 
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            }
+        )
+    )
+
+    email = forms.CharField(max_length=100, 
+    required=True,
+    widget=forms.widgets.TextInput(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            }
+        )
+    )
+
+    first_name = forms.CharField(
+    max_length=100, 
+    required=True,
+    widget=forms.widgets.TextInput(
+        attrs={
+            'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+        }
+    )
+    )
+    last_name = forms.CharField(
+        max_length=100, 
+        required=True,
+        widget=forms.widgets.TextInput(
+            attrs={
+                'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            }
+        )
+    )
+
+    class Meta:
+        model = get_user_model()
+        fields = ('first_name', 'last_name', 'email', 'username')
 
 
 
