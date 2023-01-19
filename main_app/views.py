@@ -21,7 +21,7 @@ def dashboard(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            return redirect('main_app:home')
+            return redirect('main_app:dashboard')
 
     
     return render(request, 'dashboard.html', {'posts': followed_posts, 'form': form })
@@ -38,7 +38,7 @@ def home(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            return redirect('main_app:explore')
+            return redirect('main_app:home')
 
     
     return render(request, 'home.html', {'posts': posts, 'form': form})
