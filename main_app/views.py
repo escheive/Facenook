@@ -65,7 +65,7 @@ def view_post(request, pk):
             comment.user = request.user
             comment.post = post
             comment.save()
-            return render('main_app:view_post', pk=post.id)
+            return redirect('main_app:view_post', pk=post.id)
 
     return render(request, 'view_post.html', { 'post': post, 'comments': comments, 'form': form })
 
@@ -147,11 +147,14 @@ def edit_profile(request, pk):
 
 def delete_profile(request, pk):
     profile = Profile.objects.get(pk=pk)
+    user = profile.user
     if request.method == "POST":
         profile.delete()
+        user.delete()
+        messages.success(request, 'Your profile has been deleted successfully')
         return redirect('main_app:home')
 
-    return render(request, 'delete_post.html')
+    return render(request, 'home.html')
 
 class CreatePost(CreateView):
     model = Post 
@@ -176,7 +179,7 @@ def signup(request):
       profile = form.save()
       # This is how we log a user in via code
       login(request, user)
-      return redirect('{% url main_app:dashboard.html %}')
+      return redirect('main_app:dashboard.html')
     else:
       error_message = 'Invalid sign up - try again'
   # A GET or a bad POST request, so render signup.html with an empty form
