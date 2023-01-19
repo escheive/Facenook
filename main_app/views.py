@@ -65,11 +65,11 @@ def view_post(request, pk):
     return render(request, 'view_post.html', { 'post': post, 'comments': comments, 'form': form })
 
 def delete_post(request, pk):
-    context = {}
+
     post = Post.objects.get(pk=pk)
     if request.method == "POST":
         post.delete()
-        return redirect('main_app:view_profile', pk=request.user.id)
+        return redirect('main_app:view_profile', pk=request.user.profile.id)
 
     return render(request, 'delete_post.html')
 
@@ -128,14 +128,25 @@ def edit_profile(request, pk):
     profile = Profile.objects.get(pk=pk)
     user_posts = Post.objects.filter(user=profile.user).order_by('-created_at')
 
-    form = EditUserForm()
-    if request.method == 'POST':
+    if request.POST:
+        form = EditUserForm(request.POST, instance=profile.user)
         if form.is_valid():
-            form.save()
             messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='users-profile')
+            user = form.save()
+            profile = form.save()
+            return redirect('main_app:view_profile', pk=user.profile.id)
+    else:
+        form = EditUserForm(instance=profile.user)
 
     return render(request, "edit_profile.html", {"profile": profile, 'user_posts': user_posts, 'form': form})
+
+def delete_profile(request, pk):
+    profile = Profile.objects.get(pk=pk)
+    if request.method == "POST":
+        profile.delete()
+        return redirect('main_app:home')
+
+    return render(request, 'delete_post.html')
 
 class CreatePost(CreateView):
     model = Post 
@@ -157,6 +168,7 @@ def signup(request):
     if form.is_valid():
       # This will add the user to the database
       user = form.save()
+      profile = form.save()
       # This is how we log a user in via code
       login(request, user)
       return redirect('{% url main_app:dashboard.html %}')

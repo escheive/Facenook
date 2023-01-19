@@ -11,21 +11,31 @@ class SignUpForm(UserCreationForm):
         fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
 
 class EditUserForm(forms.ModelForm):
+    # def __init__(self, **kwargs):
+    #     self.username = kwargs.pop('username', None)
+    #     self.email = kwargs.pop('email', None)
+    #     self.first_name = kwargs.pop('first_name', None)
+    #     self.last_name = kwargs.pop('last_name', None)
+    #     super(EditUserForm, self).__init__(**kwargs)
 
     username = forms.CharField(
         max_length=100, 
-        required=True,
+        required=False,
         widget=forms.widgets.TextInput(
             attrs={
+                'name': '',
+                'required': 'True',
                 'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
             }
         )
     )
 
     email = forms.CharField(max_length=100, 
-    required=True,
+    required=False,
     widget=forms.widgets.TextInput(
             attrs={
+                'name': '',
+                'required': 'True',
                 'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
             }
         )
@@ -33,18 +43,22 @@ class EditUserForm(forms.ModelForm):
 
     first_name = forms.CharField(
     max_length=100, 
-    required=True,
+    required=False,
     widget=forms.widgets.TextInput(
         attrs={
+            'name': '',
+            'required': 'True',
             'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
         }
     )
     )
     last_name = forms.CharField(
         max_length=100, 
-        required=True,
+        required=False,
         widget=forms.widgets.TextInput(
             attrs={
+                'name': '',
+                'required': 'True',
                 'class': 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
             }
         )
@@ -52,7 +66,8 @@ class EditUserForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ('first_name', 'last_name', 'email', 'username')
+        fields = ('first_name', 'last_name', 'email', 'username', 'password1', 'password2')
+        exclude = ('password1', 'password2')
 
 
 
