@@ -16,4 +16,5 @@ urlpatterns = [
     path('post/', views.CreatePost.as_view(), name='create'),
     path('delete_post/<int:pk>/', views.delete_post, name='delete'),
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('explore/', views.explore, name='explore'),
 ]

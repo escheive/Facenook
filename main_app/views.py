@@ -9,6 +9,12 @@ from .models import Post, Profile, Comment
 from .forms import SignUpForm, PostForm, CommentForm, EditUserForm
 
 
+
+def home(request):
+
+    return render(request, 'home.html')
+
+
 @login_required
 def dashboard(request):
     followed_posts = Post.objects.filter(
@@ -28,8 +34,7 @@ def dashboard(request):
 
 
 
-
-def home(request):
+def explore(request):
     posts = Post.objects.all().order_by("-created_at")
 
     form = PostForm(request.POST or None)
@@ -38,10 +43,10 @@ def home(request):
             post = form.save(commit=False)
             post.user = request.user
             post.save()
-            return redirect('main_app:home')
+            return redirect('main_app:explore')
 
     
-    return render(request, 'home.html', {'posts': posts, 'form': form})
+    return render(request, 'explore.html', {'posts': posts, 'form': form})
 
 
 def profile_list(request):
