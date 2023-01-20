@@ -1,1 +1,1 @@
-web: gunicorn facenook_project.wsgi --log-file -
+web: gunicorn facenook_project.wsgi
