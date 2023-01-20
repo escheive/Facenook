@@ -164,4 +164,4 @@ NPM_BIN_PATH = '/usr/local/bin/npm'
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('tailwind', 'uni_form')
 
 import django_on_heroku
-django_on_heroku.settings(locals(), staticfiles=False)
+django_on_heroku.settings(locals())
