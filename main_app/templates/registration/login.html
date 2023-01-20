@@ -3,6 +3,8 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
+
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
@@ -22,8 +24,8 @@
 
   <form method="post" action="/accounts/login/">
     {% csrf_token %}
-    {{ form }}
-    <button type="submit" value="login">Login</button>
+    {{ form|crispy }}
+    <button type="submit" value="login" class="btn">Login</button>
     <p><a href="/accounts/signup">Not a user? Sign up</a></p>
     <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
     <input type="hidden" name="next" value="{{ next }}">

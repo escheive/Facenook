@@ -157,5 +157,6 @@ INTERNAL_IPS = [
 
 NPM_BIN_PATH = '/usr/local/bin/npm'
 
-CRISPY_TEMPLATE_PACK = 'tailwind'
+CRISPY_ALLOWED_TEMPLATE_PACKS = ('tailwind', 'uni_form')
+# CRISPY_TEMPLATE_PACK = ('tailwind', 'uni_form')
 
