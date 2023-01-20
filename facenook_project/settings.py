@@ -21,10 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-*xee^x=1l5t7xd7#w)#0n76aksi28=!%zqaz^8(rg#it-w)nmo'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True if os.environ['MODE'] == 'dev' else False
 
 ALLOWED_HOSTS = []
 
@@ -86,7 +86,11 @@ WSGI_APPLICATION = 'facenook_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'facenook',
+        'NAME': 'escheive/facenook',
+        'USER': 'escheive',
+        'PASSWORD': os.environ['DB_PASSWORD'],
+        'HOST': 'db.bit.io',
+        'PORT': '5432'
     }
 }
 
@@ -158,5 +162,6 @@ INTERNAL_IPS = [
 NPM_BIN_PATH = '/usr/local/bin/npm'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('tailwind', 'uni_form')
-# CRISPY_TEMPLATE_PACK = ('tailwind', 'uni_form')
 
+import django_on_heroku
+django_on_heroku.settings(locals())
