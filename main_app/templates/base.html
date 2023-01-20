@@ -14,6 +14,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.1/flowbite.min.css"  rel="stylesheet" />
         <!-- <script src="../../theme/static_src/node_modules/flowbite/dist/flowbite.js" type="javascript" defer></script> -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.1/flowbite.js"></script>
+        <script type="javascript" src="../static/scripts/main.js" defer></script>
         <title>Facenook</title>
     </head>
   <body>
@@ -30,8 +31,8 @@
 
         <div class="flex md:order-2">
           {% if not user.is_authenticated %}
-          <a href="/accounts/signup"><button type="button" class="text-gray-900 bg-purple-100 hover:bg-purple-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Sign Up</button></a>
-          <a href="/accounts/login"><button type="button" class="text-gray-900 bg-purple-100 hover:bg-purple-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Log In</button></a>
+          <a href="/accounts/signup"><button type="button" class="text-gray-900 bg-purple-100 hover:bg-purple-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Sign Up</button></a>
+          <a href="/accounts/login"><button type="button" class="text-gray-900 bg-purple-100 hover:bg-purple-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Log In</button></a>
           {% else %}
           <a href="/accounts/logout"><button type="button" class="text-gray-900 bg-purple-100 hover:bg-purple-200 border border-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">Log Out</button></a>
           {% endif %}
@@ -45,7 +46,7 @@
           <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             {% if user.is_authenticated %}
             <li>
-              <a href="/" class="block py-2 pl-3 pr-4 text-white bg-gray-700 rounded md:bg-transparent md:text-gray-700 md:p-0 dark:text-white" aria-current="page">Home</a>
+              <a href="/explore" class="block py-2 pl-3 pr-4 text-gray-700 bg-gray-700 rounded md:bg-transparent md:text-gray-700 md:p-0 dark:text-white">Explore</a>
             </li>
             <li>
               <a href="/about" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-gray-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">About</a>

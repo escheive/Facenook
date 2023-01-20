@@ -1,9 +1,35 @@
-<h1>Log In</h1>
+{% extends "base.html" %}
 
-<!-- Add the login form -->
-<form method="post" action="/accounts/login/">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <input type="submit" class="btn" value="login">
-  <input type="hidden" name="next" value="{{ next }}">
-</form>
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<div class="flex-col justify-center">
+
+  <h1>Log In</h1>
+
+  <form method="post" action="/accounts/login/">
+    {% csrf_token %}
+    {{ form }}
+    <button type="submit" value="login">Login</button>
+    <p><a href="/accounts/signup">Not a user? Sign up</a></p>
+    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    <input type="hidden" name="next" value="{{ next }}">
+  </form>
+</div>
+
+
+
+{% endblock %}

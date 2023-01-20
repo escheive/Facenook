@@ -3,9 +3,10 @@ from django.views import View
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib import messages
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
 from django.contrib.auth.decorators import login_required
-from .models import Post, Profile, Comment
+from django.views.decorators.csrf import csrf_exempt
+from .models import Post, Profile, Comment, User
 from .forms import SignUpForm, PostForm, CommentForm, EditUserForm
 
 
@@ -33,7 +34,7 @@ def dashboard(request):
     return render(request, 'dashboard.html', {'posts': followed_posts, 'form': form })
 
 
-
+@login_required
 def explore(request):
     posts = Post.objects.all().order_by("-created_at")
 
@@ -49,11 +50,13 @@ def explore(request):
     return render(request, 'explore.html', {'posts': posts, 'form': form})
 
 
+@login_required
 def profile_list(request):
     profiles = Profile.objects.exclude(user=request.user)
 
     return render(request, "profile_list.html", {"profiles": profiles})
 
+@login_required
 def view_post(request, pk):
     post = Post.objects.get(pk=pk)
     comments = Comment.objects.filter(post=post.id)
@@ -69,6 +72,7 @@ def view_post(request, pk):
 
     return render(request, 'view_post.html', { 'post': post, 'comments': comments, 'form': form })
 
+@login_required
 def delete_post(request, pk):
 
     post = Post.objects.get(pk=pk)
@@ -78,6 +82,7 @@ def delete_post(request, pk):
 
     return render(request, 'delete_post.html')
 
+@login_required
 def view_comment(request, pk):
     comment = Comment.objects.get(pk=pk)
 
@@ -99,6 +104,7 @@ def view_comment(request, pk):
 class About(TemplateView):
     template_name = 'about.html'
 
+@login_required
 def view_profile(request, pk):
     if not hasattr(request.user, 'profile'):
         missing_profile = Profile(user=request.user)
@@ -128,6 +134,7 @@ def view_profile(request, pk):
 
     return render(request, "view_profile.html", {"profile": profile, 'form': form, 'user_posts': user_posts})
 
+@login_required
 def edit_profile(request, pk):
 
     profile = Profile.objects.get(pk=pk)
@@ -145,16 +152,20 @@ def edit_profile(request, pk):
 
     return render(request, "edit_profile.html", {"profile": profile, 'user_posts': user_posts, 'form': form})
 
+
+@csrf_exempt
 def delete_profile(request, pk):
-    profile = Profile.objects.get(pk=pk)
-    user = profile.user
+
+    profile = Profile.objects.get(user=request.user)
+
     if request.method == "POST":
-        profile.delete()
+
+        user = User.objects.get(profile=profile)
         user.delete()
         messages.success(request, 'Your profile has been deleted successfully')
         return redirect('main_app:home')
 
-    return render(request, 'home.html')
+    return render(request, 'delete_profile.html')
 
 class CreatePost(CreateView):
     model = Post 
@@ -179,7 +190,7 @@ def signup(request):
       profile = form.save()
       # This is how we log a user in via code
       login(request, user)
-      return redirect('main_app:dashboard.html')
+      return redirect('/dashboard')
     else:
       error_message = 'Invalid sign up - try again'
   # A GET or a bad POST request, so render signup.html with an empty form

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'clearcache',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -155,4 +156,6 @@ INTERNAL_IPS = [
 ]
 
 NPM_BIN_PATH = '/usr/local/bin/npm'
+
+CRISPY_TEMPLATE_PACK = 'tailwind'
 

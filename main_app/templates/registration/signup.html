@@ -1,12 +1,61 @@
-<div class="flex justify-center">
+{% extends "base.html" %}
+
+<!-- <div class="flex justify-center">
   <h1>Sign Up</h1>
 
   {% if error_message %}<p class="red-text">{{ error_message }}</p>{% endif %}
 
-  <form method="POST" action="/accounts/signup/">
+  <form method="POST" action="/accounts/signup/" class="flex justify-center">
     {% csrf_token %}
-    {{ form.as_p }}
+    {{ form }}
     <input type="submit" class="btn" value="signup">
+  </form> -->
+
+
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+
+  <form method="POST" class="mx-16">
+    {% csrf_token %}
+    <div class="relative z-0 w-full mb-6 group">
+        {{ form.username }}
+    </div>
+    <div class="relative z-0 w-full mb-6 group">
+        {{ form.email }}
+    </div>
+    <div class="grid md:grid-cols-2 md:gap-6">
+      <div class="relative z-0 w-full mb-6 group">
+          {{ form.first_name }}
+      </div>
+      <div class="relative z-0 w-full mb-6 group">
+          {{ form.last_name }}
+      </div>
+    </div>
+    <div class="grid md:grid-cols-2 md:gap-6">
+      <div class="relative z-0 w-full mb-6 group">
+          {{ form.password1 }}
+      </div>
+      <div class="relative z-0 w-full mb-6 group">
+          {{ form.password2 }}
+      </div>
+    </div>
+    <button type="submit" class="text-gray-700 bg-purple-100 hover:bg-purple-200 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Sign Up</button>
+    <p>Already have an account? <a href="/accounts/login" class="underline text-purple-500 hover:text-purple-800">Log in</a></p>
   </form>
 
-</div>
+
+{% endblock %}
