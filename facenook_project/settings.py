@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG=True if os.environ['MODE'] == 'dev' else False
 
-ALLOWED_HOSTS = ['heroku.com']
+ALLOWED_HOSTS = ['.heroku.com']
 
 
 # Application definition
@@ -164,4 +164,4 @@ NPM_BIN_PATH = '/usr/local/bin/npm'
 CRISPY_ALLOWED_TEMPLATE_PACKS = ('tailwind', 'uni_form')
 
 import django_on_heroku
-django_on_heroku.settings(locals())
+django_on_heroku.settings(locals(), staticfiles=False)
