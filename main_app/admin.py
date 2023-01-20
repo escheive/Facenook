@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from .models import Post, Profile, Comment
 
 
@@ -18,9 +18,10 @@ class UserAdmin(admin.ModelAdmin):
 
 
 # Unregister the default django groups
-admin.site.unregister(Group)
+# admin.site.unregister(Group)
 # Unregister and re-register User to change what is displayed from Django's default settings
 admin.site.unregister(User)
+# admin.site.register(User)
 admin.site.register(User, UserAdmin)
 # Register your models here.
 admin.site.register(Post)
