@@ -150,7 +150,7 @@ STATICFILES_FINDERS = [
 
 COMPRESS_ROOT = BASE_DIR/'theme/static_src/static'
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = os.environ.get('COMPRESS_ENABLED', False)
 
 # for tailwind
 TAILWIND_APP_NAME = 'theme'
