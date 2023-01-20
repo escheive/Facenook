@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<div class="flex flex-col justify-center items-center">
+<div class="flex flex-col justify-center items-center mx-auto">
     <h1 class="text-5xl">{{ profile.user.username|capfirst }}'s Page</h1>
     <h2> {{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
     <h2> {{ profile.user.email }}</h2>
@@ -29,7 +29,7 @@
 
 </div>
 
-<div class="py-4 grid gap-0 grid-cols-4">
+<div class="py-4 grid gap-0 grid-cols-4 mx-auto">
 
     <form method="post" class="flex justify-center w-fit h-fit">
         {% csrf_token %}
@@ -72,38 +72,62 @@
         </div>
         {% endfor %}
     </div>
-    <div class="relative h-fit flex overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full bg-purple-100 table-auto text-sm text-center text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+    <!-- <div class="relative h-fit flex overflow-x-auto shadow-md sm:rounded-lg">
+        <table class="w-full bg-purple-100 table-auto sm:text-sm text-xs text-center text-gray-500 dark:text-gray-400">
+            <thead class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
                 <tr>
-                    <th scope="col" class="px-6 bg-gray-50 py-4 rounded-l-lg p-6 space-y-3">
+                    <th scope="col" class="bg-gray-50 py-4 rounded-l-lg space-y-3">
+                        
                         Followers
                     </th>
-                    <th scope="col" class="px-6 bg-gray-50 py-4 rounded-r-lg p-6 space-y-3">
-                        <!-- <th scope="col" class="px-6 py-3"> -->
+                    <th scope="col" class="bg-gray-50 py-4 rounded-r-lg space-y-3">
                         Following
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <ul class="px-6 py-3">
+                    <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <ul class="py-3">
                             {% for follower in profile.followed_by.all %}
-                            <li class="group mx-auto rounded-lg p-6 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
+                            <li class="group mx-auto rounded-lg py-5 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
                             {% endfor %}
                         </ul>
                     </th>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <ul class="px-6 py-3">
+                    <th scope="row" class="px-4 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <ul class="py-3">
                             {% for following in profile.follows.all %}
-                            <li class="group mx-auto rounded-lg p-6 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
+                            <li class="group mx-auto py-5 rounded-lg space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
                             {% endfor %}
                         </ul>
                     </th>
                 </tr>
             </tbody>
         </table>
+    </div> -->
+    <div class="relative h-fit flex overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="grid grid-cols-2 w-full bg-gray-50 table-auto sm:text-sm text-xs text-center text-gray-500 dark:text-gray-400">
+            <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                <p scope="col" class="bg-gray-50 text-xs py-4 rounded-l-lg space-y-3">
+                    Followers
+                </p>
+                <ul class="py-3">
+                    {% for follower in profile.followed_by.all %}
+                    <li class="group mx-auto rounded-lg py-5 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                <p scope="col" class="bg-gray-50 py-4 rounded-l-lg space-y-3">
+                    Following
+                </p>
+                <ul class="py-3">
+                    {% for following in profile.follows.all %}
+                    <li class="group mx-auto py-5 rounded-lg space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 
