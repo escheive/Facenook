@@ -1,1 +1,1 @@
-web: gunicorn facenook.wsgi
+web: gunicorn facenook_project.wsgi
