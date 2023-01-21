@@ -3,7 +3,7 @@
 {% block content %}
 
 
-<div class="flex flex-col justify-center items-center mx-auto">
+<div class="flex flex-col items-center">
     <h1 class="text-5xl">{{ profile.user.username|capfirst }}'s Page</h1>
     <h2> {{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
     <h2> {{ profile.user.email }}</h2>
@@ -29,7 +29,32 @@
 
 </div>
 
-<div class="py-4 grid gap-0 grid-cols-4 mx-auto">
+<div class="py-4 mx-auto flex-col items-center justify-center">
+
+    <div class="relative h-fit flex overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="grid grid-cols-2 w-full bg-gray-50 table-auto sm:text-sm text-xs text-center text-gray-500 dark:text-gray-400">
+            <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                <p scope="col" class="bg-gray-50 text-xs py-2 rounded-l-lg space-y-3">
+                    Followers
+                </p>
+                <ul class="py-3">
+                    {% for follower in profile.followed_by.all %}
+                    <li class="group mx-auto rounded-lg py-2 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                <p scope="col" class="bg-gray-50 py-2 rounded-l-lg space-y-3">
+                    Following
+                </p>
+                <ul class="py-3">
+                    {% for following in profile.follows.all %}
+                    <li class="group mx-auto py-2 rounded-lg space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <form method="post" class="flex justify-center w-fit h-fit">
         {% csrf_token %}
@@ -63,11 +88,6 @@
     
                         <span><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">❤️ {{ post.likes }}</button></span>
                     </div>
-                <div class="px-6 pt-4 pb-2 flex flex-row">
-                    <span class="w-fit inline-block bg-gray-200 rounded-full py-1 text-sm font-semibold text-gray-700 mr-1 px-1 mb-2">#photography</span>
-                    <span class="inline-block bg-gray-200 rounded-full px-1 py-1 text-sm font-semibold text-gray-700 mr-1 px-1 ml-1 mb-2">#travel</span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-1 px-1 ml-1 mb-2">#winter</span>
-                </div>
             </a>
         </div>
         {% endfor %}
@@ -105,30 +125,6 @@
             </tbody>
         </table>
     </div> -->
-    <div class="relative h-fit flex overflow-x-auto shadow-md sm:rounded-lg">
-        <div class="grid grid-cols-2 w-full bg-gray-50 table-auto sm:text-sm text-xs text-center text-gray-500 dark:text-gray-400">
-            <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
-                <p scope="col" class="bg-gray-50 text-xs py-4 rounded-l-lg space-y-3">
-                    Followers
-                </p>
-                <ul class="py-3">
-                    {% for follower in profile.followed_by.all %}
-                    <li class="group mx-auto rounded-lg py-5 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
-                <p scope="col" class="bg-gray-50 py-4 rounded-l-lg space-y-3">
-                    Following
-                </p>
-                <ul class="py-3">
-                    {% for following in profile.follows.all %}
-                    <li class="group mx-auto py-5 rounded-lg space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
 </div>
 
 {% endblock %}
