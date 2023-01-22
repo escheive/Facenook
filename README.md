@@ -9,6 +9,8 @@ https://flowbite.com/
 https://realpython.com/django-social-forms-4/
 # For help with making a comment reply section
 https://focusustech.com/blog/create-a-comment-and-reply-system-in-django
+# For help with validation errors on signup and login
+https://stackoverflow.com/questions/67852134/how-to-see-if-username-already-exists-in-usercreationfield-django
 
 ## Wire Frames
 
