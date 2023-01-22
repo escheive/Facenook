@@ -1,5 +1,7 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django import forms
 from django.forms import PasswordInput, TextInput
@@ -42,9 +44,41 @@ class SignUpForm(UserCreationForm):
             self.fields[fieldname].help_text = None
             self.fields[fieldname].label = ''
 
+    def clean(self):
+        cleaned_data=super().clean()
+        # check if username is already taken
+        if User.objects.filter(username=cleaned_data['username']).exists():
+            raise ValidationError("That username is already taken")
+
+        # grab password from form
+        password1 = self.cleaned_data['password1']
+        password2 = self.cleaned_data.get('password2')
+        # validate password
+        min_length = 8
+        if len(password1) < min_length:
+            raise ValidationError('Password must be at least %s characters long.' %(str(min_length)))
+
+        # check for digit
+        if sum(c.isdigit() for c in password1) < 1:
+            raise ValidationError('Password must contain at least 1 number.')
+
+        # check for uppercase letter
+        if not any(c.isupper() for c in password1):
+            raise ValidationError('Password must contain at least 1 uppercase letter.')
+
+        # check for lowercase letter
+        if not any(c.islower() for c in password1):
+            raise ValidationError('Password must contain at least 1 lowercase letter.')
+
+        if password1 and password2:
+            if password1 != password2:
+                raise ValidationError("The two password fields must match.")
+        return cleaned_data
+
     class Meta:
         model = get_user_model()
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+
 
 # class LoginForm(forms.ModelForm):
 

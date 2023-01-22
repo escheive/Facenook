@@ -178,22 +178,28 @@ class CreatePost(CreateView):
         return redirect('/')
 
 
+
+
+# View for the User signup page
 def signup(request):
-  error_message = ''
-  if request.method == 'POST':
-    # This is how to create a 'user' form object
-    # that includes the data from the browser
-    form = SignUpForm(request.POST)
-    if form.is_valid():
-      # This will add the user to the database
-      user = form.save()
-      profile = form.save()
-      # This is how we log a user in via code
-      login(request, user)
-      return redirect('/dashboard')
+  
+    form = SignUpForm()
+
+    if request.method == 'POST':
+
+        # This is how to create a 'user' form object, that includes the data from the browser
+        form = SignUpForm(request.POST)
+
+        if form.is_valid():
+            # This will add the user to the database
+            user = form.save()
+            # This is how we log a user in via code
+            login(request, user)
+            # redirect user to their dashboard after they are signed up and logged in
+            return redirect('/dashboard')
+
     else:
-      error_message = 'Invalid sign up - try again'
-  # A GET or a bad POST request, so render signup.html with an empty form
-  form = SignUpForm
-  context = {'form': form, 'error_message': error_message}
-  return render(request, 'registration/signup.html', context)
+        # A GET or a bad POST request, so render signup.html with an empty form
+        form = SignUpForm()
+    
+    return render(request, 'registration/signup.html', {'form': form})

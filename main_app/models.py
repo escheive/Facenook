@@ -7,7 +7,7 @@ from django.dispatch import receiver
 # Create post model
 
 class Post(models.Model):
-    user = models.ForeignKey(User, related_name="posts", on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
     content = models.CharField(max_length=140)
     likes = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -21,7 +21,7 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, related_name='comments', on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
     parent = models.ForeignKey('self' , null=True , blank=True , on_delete=models.CASCADE , related_name='replies')
     content = models.CharField(max_length=140)
