@@ -18,7 +18,6 @@ class UserAdmin(admin.ModelAdmin):
 
 
 # Unregister the default django groups
-# admin.site.unregister(Group)
 # Unregister and re-register User to change what is displayed from Django's default settings
 admin.site.unregister(User)
 # admin.site.register(User)

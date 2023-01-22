@@ -10,7 +10,7 @@ from .models import Post, Comment, Profile
 
 
 
-
+# Form for creating a user account
 class SignUpForm(UserCreationForm):
 
     def __init__(self, *args, **kwargs):
@@ -80,29 +80,9 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
 
 
-# class LoginForm(forms.ModelForm):
-
-#     class Meta:
-#         model = get_user_model()
-#         fields = ('username', 'password1')
-
-#     def __init__(self, *args, **kwargs):
-#         super(LoginForm, self).__init__(*args, **kwargs)
-
-#         for fieldname in ['username', 'password1']:
-#             self.fields['username'].widget = TextInput(
-#                 attrs={
-#                     'placeholder': 'Username', 
-#                     'class': "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"})
-#             self.fields['password1'].widget = PasswordInput(
-#                 attrs={
-#                     'placeholder': 'Password', 
-#                     'class': "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"})
-
-            
 
 
-
+# Form for editing a users acct
 class EditUserForm(forms.ModelForm):
 
     username = forms.CharField(
@@ -159,7 +139,7 @@ class EditUserForm(forms.ModelForm):
 
 
 
-
+# Form for posting content
 class PostForm(forms.ModelForm):
     content = forms.CharField(
         required=True,
@@ -180,10 +160,7 @@ class PostForm(forms.ModelForm):
 
 
 
-
-
-
-
+# Form for posting a comment on a post
 class CommentForm(forms.ModelForm):
     content = forms.CharField(
         required=True,

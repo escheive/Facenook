@@ -1,4 +1,4 @@
-# Facenook
+## Facenook
 
 Citations
 # Used tailwind for my primary css needs
@@ -74,19 +74,19 @@ MODELS
     | /deletepost/:id      | DELETE        | delete          | viewpost                |
 
 
-STACK
+## STACK
 
 Will be created using Django and Postgres
 Want to learn Motion UI
 
-MVP GOALS
+## MVP GOALS
 
 Home page with a main feed with users posts
 A profile page that shows all of that profile's content
 Authentication that is necessary to interact with others, create an account
 Option to like and comment on other user's content
 
-STRETCH GOALS
+## STRETCH GOALS
 
 Search option on nav that lets you search for other accounts, and even other posts
 The option to follow users to receive their content on your page instead of general content, and move the universal content to an explore page

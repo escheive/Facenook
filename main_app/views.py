@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.views import View
+from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.edit import CreateView
 from django.contrib import messages
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .models import Post, Profile, Comment, User
@@ -11,11 +10,15 @@ from .forms import SignUpForm, PostForm, CommentForm, EditUserForm
 
 
 
+
+# View for the main page before signing up or logging in
 def home(request):
 
     return render(request, 'home.html')
 
 
+
+# View for the dashboard page
 @login_required
 def dashboard(request):
     followed_posts = Post.objects.filter(
@@ -34,6 +37,8 @@ def dashboard(request):
     return render(request, 'dashboard.html', {'posts': followed_posts, 'form': form })
 
 
+
+# View for the explore page
 @login_required
 def explore(request):
     posts = Post.objects.all().order_by("-created_at")
@@ -50,12 +55,17 @@ def explore(request):
     return render(request, 'explore.html', {'posts': posts, 'form': form})
 
 
+
+# View for the profile list page
 @login_required
 def profile_list(request):
     profiles = Profile.objects.exclude(user=request.user)
 
     return render(request, "profile_list.html", {"profiles": profiles})
 
+
+
+# View for viewing a users post
 @login_required
 def view_post(request, pk):
     post = Post.objects.get(pk=pk)
@@ -72,6 +82,9 @@ def view_post(request, pk):
 
     return render(request, 'view_post.html', { 'post': post, 'comments': comments, 'form': form })
 
+
+
+# View for deleting a post
 @login_required
 def delete_post(request, pk):
 
@@ -82,6 +95,9 @@ def delete_post(request, pk):
 
     return render(request, 'delete_post.html')
 
+
+
+# View for viewing a comment
 @login_required
 def view_comment(request, pk):
     comment = Comment.objects.get(pk=pk)
@@ -104,6 +120,9 @@ def view_comment(request, pk):
 class About(TemplateView):
     template_name = 'about.html'
 
+
+
+# View for viewing a user profile
 @login_required
 def view_profile(request, pk):
     if not hasattr(request.user, 'profile'):
@@ -134,6 +153,9 @@ def view_profile(request, pk):
 
     return render(request, "view_profile.html", {"profile": profile, 'form': form, 'user_posts': user_posts})
 
+
+
+# View for editing a profile
 @login_required
 def edit_profile(request, pk):
 
@@ -153,20 +175,29 @@ def edit_profile(request, pk):
     return render(request, "edit_profile.html", {"profile": profile, 'user_posts': user_posts, 'form': form})
 
 
+# View for deleting a users acct
 @csrf_exempt
 def delete_profile(request, pk):
 
+    # grab the profile from the database
     profile = Profile.objects.get(user=request.user)
 
     if request.method == "POST":
-
+        # grab the user
         user = User.objects.get(profile=profile)
+        # delete the user
         user.delete()
+        # send a confirmation message
         messages.success(request, 'Your profile has been deleted successfully')
+        # redirect back to the home page
         return redirect('main_app:home')
 
     return render(request, 'delete_profile.html')
 
+
+
+# View for creating a post
+@login_required
 class CreatePost(CreateView):
     model = Post 
     fields = ['user', 'content']
@@ -176,7 +207,6 @@ class CreatePost(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return redirect('/')
-
 
 
 
