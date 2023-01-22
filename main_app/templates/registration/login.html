@@ -12,14 +12,7 @@
     <div>
       <span class="font-medium">
         <div class="alert alert-danger">
-          <!-- {% for field in form %}
-            {% for error in field.errors %}
-              {{ error }}
-            {% endfor %}
-          {% endfor %} -->
-            {% for error in form.non_field_errors%}
-              {{ form.non_field_errors }}
-            {% endfor %}
+          <p>Invalid username or password</p>
         </div>
       </span>
     </div>
