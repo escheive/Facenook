@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView
+from django.views import View
 from django.contrib import messages
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
@@ -197,7 +198,6 @@ def delete_profile(request, pk):
 
 
 # View for creating a post
-@login_required
 class CreatePost(CreateView):
     model = Post 
     fields = ['user', 'content']
