@@ -33,6 +33,12 @@ https://stackoverflow.com/questions/67852134/how-to-see-if-username-already-exis
 <img width="776" alt="search" src="https://media.git.generalassemb.ly/user/45843/files/8ed122af-028f-41ae-9f82-154ae22b6f2a">
 <img width="772" alt="search results" src="https://media.git.generalassemb.ly/user/45843/files/cf48d351-ad03-470d-89ec-0ae44cf0c8fb">
 
+## Live Site
+
+<img width="1070" alt="Screen Shot 2023-01-23 at 4 38 55 AM" src="https://user-images.githubusercontent.com/115295094/214041723-db5842d1-6ba3-4f2f-a545-c012f9d4d45e.png">
+<img width="1065" alt="Screen Shot 2023-01-23 at 4 39 38 AM" src="https://user-images.githubusercontent.com/115295094/214041873-b16de330-5139-45c3-838a-83d2364349a6.png">
+<img width="1069" alt="Screen Shot 2023-01-23 at 4 39 54 AM" src="https://user-images.githubusercontent.com/115295094/214041925-035b503f-52c6-4158-b9bc-a571d74b4e0b.png">
+
 
 
 ## GitHub Repository where the project is stored
