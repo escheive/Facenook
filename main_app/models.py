@@ -27,8 +27,8 @@ class Post(models.Model):
 # Model for user comments, tied to users and posts, 1 user to many comments, and 1 post to many comments
 class Comment(models.Model):
     user = models.ForeignKey(User, related_name='comments', on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
-    parent = models.ForeignKey('self' , null=True , blank=True , on_delete=models.CASCADE , related_name='replies')
+    post = models.ForeignKey(Post, null=True, related_name='comments', on_delete=models.CASCADE)
+    parent = models.ForeignKey('self' , null=True, blank=True , on_delete=models.CASCADE , related_name='replies')
     content = models.CharField(max_length=140)
     likes = models.IntegerField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)

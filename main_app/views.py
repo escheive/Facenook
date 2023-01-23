@@ -117,8 +117,12 @@ def view_comment(request, pk):
     return render(request, 'view_comment.html', { 'comment': comment, 'form': form })
 
 
+    
+
+
 class About(TemplateView):
     template_name = 'about.html'
+
 
 
 
@@ -155,6 +159,7 @@ def view_profile(request, pk):
 
 
 
+
 # View for editing a profile
 @login_required
 def edit_profile(request, pk):
@@ -173,6 +178,8 @@ def edit_profile(request, pk):
         form = EditUserForm(instance=profile.user)
 
     return render(request, "edit_profile.html", {"profile": profile, 'user_posts': user_posts, 'form': form})
+
+
 
 
 # View for deleting a users acct
@@ -206,7 +213,6 @@ class CreatePost(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return redirect('/')
-
 
 
 
