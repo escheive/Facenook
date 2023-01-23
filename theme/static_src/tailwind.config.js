@@ -49,8 +49,11 @@ module.exports = {
        './node_modules/flowbite/**/*.js',
     ],
     darkMode: 'class',
-    theme: {},
+    theme: {
         extend: {
+            screens: {
+                xs: '300px'
+            },
             fontFamily: {
                 'body': [
                 'Inter', 
@@ -87,6 +90,7 @@ module.exports = {
                 'Noto Color Emoji'
                 ]
             }
+        },
     },
     plugins: [
         /**

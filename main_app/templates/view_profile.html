@@ -27,69 +27,70 @@
     <a href="{% url 'main_app:edit_profile' profile.id %}"><button type="button" class="text-gray-900 bg-purple-100 hover:bg-purple-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Edit Profile</button></a>
 {% endif %}
 
-</div>
 
-<div class="py-4 mx-auto flex-col items-center justify-center">
 
-    <div class="relative h-fit flex overflow-x-auto shadow-md sm:rounded-lg">
-        <div class="grid grid-cols-2 w-full bg-gray-50 table-auto sm:text-sm text-xs text-center text-gray-500 dark:text-gray-400">
-            <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
-                <p scope="col" class="bg-gray-50 text-xs py-2 rounded-l-lg space-y-3">
-                    Followers
-                </p>
-                <ul class="py-3">
-                    {% for follower in profile.followed_by.all %}
-                    <li class="group mx-auto rounded-lg py-2 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
-                <p scope="col" class="bg-gray-50 py-2 rounded-l-lg space-y-3">
-                    Following
-                </p>
-                <ul class="py-3">
-                    {% for following in profile.follows.all %}
-                    <li class="group mx-auto py-2 rounded-lg space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
+    <div class="py-4 mx-auto flex-col items-center justify-center">
 
-    <form method="post" class="flex justify-center w-fit h-fit">
-        {% csrf_token %}
-        <div class="w-full max-w-sm border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-            <div class="px-4 py-4 bg-white rounded-t-lg dark:bg-gray-800">
-                {{ form.as_p }}
-            </div>
-            <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-                <button type="submit" class="text-gray-900 bg-purple-100 hover:bg-purple-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Post</button>
-            </div>
-        </div>
-    </form>
-
-    <div class="col-span-2 gap-0">
-        {% for post in user_posts %}
-        <div class="flex grow justify-center">
-            <a href="{% url 'main_app:view_post' post.id %}" class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                
-                    <div class="font-bold text-xl mb-2">
-                        <span class="mr-2 text-lg"> {{ post.user.username|capfirst }} </span> 
-                        <span class="text-base"> {{ post.created_at }} </span>
-                    </div>
-                    <p class="text-gray-700 text-base mb-4">
-                        {{ post.content }}
+        <div class="relative h-fit flex overflow-x-auto shadow-md sm:rounded-lg">
+            <div class="grid grid-cols-2 w-full bg-gray-50 table-auto sm:text-sm text-xs text-center text-gray-500 dark:text-gray-400">
+                <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                    <p scope="col" class="bg-gray-50 text-xs py-2 rounded-l-lg space-y-3">
+                        Followers
                     </p>
-                    <div>
-                        <span><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-                            <svg class="w-6 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"></path></svg>
-                                {{ post.comments.count }}
-                        </button></span>
-                        <span><button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">❤️ {{ post.likes }}</button></span>
-                    </div>
-            </a>
+                    <ul class="py-3">
+                        {% for follower in profile.followed_by.all %}
+                        <li class="group mx-auto rounded-lg py-2 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+                    <p scope="col" class="bg-gray-50 py-2 rounded-l-lg space-y-3">
+                        Following
+                    </p>
+                    <ul class="py-3">
+                        {% for following in profile.follows.all %}
+                        <li class="group mx-auto py-2 rounded-lg space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
-        {% endfor %}
+
+        <form method="post" class="flex items-center justify-center w-fit h-fit">
+            {% csrf_token %}
+            <div class="w-full border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                <div class="px-4 py-4 bg-white rounded-t-lg dark:bg-gray-800">
+                    {{ form.as_p }}
+                </div>
+                <div class="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
+                    <button type="submit" class="text-gray-900 bg-purple-100 hover:bg-purple-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Post</button>
+                </div>
+            </div>
+        </form>
+
+        <div class="col-span-2 gap-0">
+            {% for post in user_posts %}
+            <div class="flex grow justify-center">
+                <a href="{% url 'main_app:view_post' post.id %}" class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                    
+                        <div class="font-bold text-xl mb-2">
+                            <span class="mr-2 text-lg"> {{ post.user.username|capfirst }} </span> 
+                            <span class="text-base"> {{ post.created_at }} </span>
+                        </div>
+                        <p class="text-gray-700 text-base mb-4">
+                            {{ post.content }}
+                        </p>
+                        <div>
+                            <span><button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+                                <svg class="w-6 h-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z"></path></svg>
+                                    {{ post.comments.count }}
+                            </button></span>
+                            <span><button type="submit" class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">❤️ {{ post.likes }}</button></span>
+                        </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 </div>
 
