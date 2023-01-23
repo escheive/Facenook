@@ -105,7 +105,6 @@ def view_comment(request, pk):
 
     form = CommentForm(request.POST or None)
     if request.method == 'POST':
-        print('-------------------------------------------------------------------------------Reached here')
         if form.is_valid():
            
 

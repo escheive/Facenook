@@ -10,6 +10,7 @@
             <div class="font-bold text-xl mb-2 w-fit">
                 <span class="mr-2 text-lg"> {{ post.user.username|capfirst }} </span> 
                 <span class="text-base"> {{ post.created_at }} </span>
+                {% if request.user.id == user.id %}
                 <span class="top-0 right-0">
                     <button id="dropdownButton" data-dropdown-toggle="dropdown" class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm" type="button">
                         <span class="sr-only">Open dropdown</span>
@@ -24,6 +25,7 @@
                         </ul>
                     </div>
                 </span>
+                {% endif %}
             </div>
                 <p class="text-gray-700 text-base">
                     {{ post.content }}

@@ -77,7 +77,7 @@ MODELS
 ## STACK
 
 Will be created using Django and Postgres
-Want to learn Motion UI
+Failed to implement motion ui with django and switched to tailwind and flowbite with django
 
 ## MVP GOALS
 
