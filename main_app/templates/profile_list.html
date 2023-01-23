@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<div class="pb-8">
+<div class="pb-16">
     {% for profile in profiles %}
 		<div class="flex justify-center">
 			<a href="{% url 'main_app:view_profile' profile.id %}" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
