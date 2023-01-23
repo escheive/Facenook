@@ -7,7 +7,7 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .models import Post, Profile, Comment, User
-from .forms import SignUpForm, PostForm, CommentForm, EditUserForm
+from .forms import SignUpForm, PostForm, CommentForm, EditUserForm, LoginForm
 
 
 
@@ -207,6 +207,8 @@ class CreatePost(CreateView):
         self.object.user = self.request.user
         self.object.save()
         return redirect('/')
+
+
 
 
 

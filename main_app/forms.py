@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 from django import forms
@@ -78,6 +78,30 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = get_user_model()
         fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+
+
+
+
+
+class LoginForm(AuthenticationForm):
+
+    def __init__(self, *args, **kwargs):
+        super(SignUpForm, self).__init__(*args, **kwargs)
+
+        for fieldname in ['username', 'password']:
+                self.fields['username'].widget = TextInput(
+                    attrs={
+                        'placeholder': 'Username', 
+                        'class': "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"})
+                self.fields['password1'].widget = PasswordInput(
+                    attrs={
+                        'placeholder': 'Password', 
+                        'class': "block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"})
+                self.fields[fieldname].help_text = None
+                self.fields[fieldname].label = ''
+                
+
+
 
 
 
