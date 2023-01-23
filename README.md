@@ -4,6 +4,20 @@
 ## By Erik Scheive
 
 
+## To Use
+- Clone the repository to your machine, install from requirements.txt. Make sure you have tailwind and flowbite installed as well. They have simple instructions on their sites. npm run dev inside of the theme/static_src file to get live css updates from adding or removing classes via tailwind. Enter virtual environment via source .env/bin/activate and then run python manage.py runserver to run locally on your machine.
+
+## General Approach
+- For this app, I started pretty simple and built up. I focused on functionality using a lot of Django's built in technology as well as getting the base for tailwind set up. I ended up using a modified usercreatioform from Django for the signup page and the default Django sign in form styled with crispy tags.
+- Once that was done, I focused on creating the views and routes. With working base routes, I then constructed forms and models to fill the views and styled them using flowbite and tailwind.
+- For my user model, I used all of Django's fields for it and extended it with a profile model. The profile model as of now just keeps track of followers.
+
+## Unsolved Problems
+- Ran into problems with like functionality. Right now, it works on the view post page but nowhere else.
+- Also ran into problems with comments on comments. I removed that from the current version.
+- I ran into problems with styling Django default forms and models but overcame those hurdles.
+- I ran into quite a few problmes with Tailwind, will probably opt for Bulma next time around
+
 ## Citations
 
 ### Used tailwind for my primary css needs
