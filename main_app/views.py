@@ -22,6 +22,7 @@ def home(request):
 # View for the dashboard page
 @login_required
 def dashboard(request):
+
     followed_posts = Post.objects.filter(
         user__profile__in=request.user.profile.follows.all()
     ).order_by("-created_at")
@@ -71,6 +72,7 @@ def profile_list(request):
 def view_post(request, pk):
     post = Post.objects.get(pk=pk)
     comments = Comment.objects.filter(post=post.id)
+    likes = post.likes
 
     form = CommentForm(request.POST or None)
     if request.method == "POST":
@@ -79,7 +81,10 @@ def view_post(request, pk):
             comment.user = request.user
             comment.post = post
             comment.save()
-            return redirect('main_app:view_post', pk=post.id)
+        else:
+            post.likes += 1
+            post.save()
+        return redirect('main_app:view_post', pk=post.id)
 
     return render(request, 'view_post.html', { 'post': post, 'comments': comments, 'form': form })
 
@@ -90,7 +95,7 @@ def view_post(request, pk):
 def delete_post(request, pk):
 
     post = Post.objects.get(pk=pk)
-    if request.method == "POST":
+    if request.method == "PUT":
         post.delete()
         return redirect('main_app:view_profile', pk=request.user.profile.id)
 
@@ -106,12 +111,13 @@ def view_comment(request, pk):
     form = CommentForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
-           
-
             comment.user = request.user
             comment = form.save(commit=False)
             comment.save()
-            return redirect('view_post.html')
+        else:
+            comment.likes += 1
+            comment.save()
+        return redirect('main_app:view_comment', pk=pk)
 
 
     return render(request, 'view_comment.html', { 'comment': comment, 'form': form })
