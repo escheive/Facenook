@@ -1,16 +1,27 @@
-# Facenook
 
-Citations
+
+# Facenook
+## By Erik Scheive
+
+
+## Citations
+
 ### Used tailwind for my primary css needs
 https://v1.tailwindcss.com/
+
 ### Flowbite is a library for tailwind
 https://flowbite.com/
-### For social media site basics
+
+### For social media site basics I referenced this guide
 https://realpython.com/django-social-forms-4/
-### For help with making a comment reply section
+
+### For help with making a comment reply section I referenced this guide
 https://focusustech.com/blog/create-a-comment-and-reply-system-in-django
-### For help with validation errors on signup and login
+
+### For help with validation errors on signup and login I referenced this forum
 https://stackoverflow.com/questions/67852134/how-to-see-if-username-already-exists-in-usercreationfield-django
+
+
 
 ## Wire Frames
 
@@ -23,8 +34,12 @@ https://stackoverflow.com/questions/67852134/how-to-see-if-username-already-exis
 <img width="772" alt="search results" src="https://media.git.generalassemb.ly/user/45843/files/cf48d351-ad03-470d-89ec-0ae44cf0c8fb">
 
 
-## GitHub Repository
+
+## GitHub Repository where the project is stored
+** Check out my other projects!**
 https://github.com/escheive/Facenook
+
+
 
 ## User Stories
 As HR, I want to see the experience and skills of a candidate on full display
@@ -34,24 +49,38 @@ As a friend, I want to see what my friend has accomplished
 As a user, I want to be able to interact with others online, and keep up to date with friends
 
 
-PROJECT IDEA
+## PROJECT IDEA
 
-My idea is a social media app, somewhat similar to twitter. A place where users can share thoughts and maybe even media with eachother. Something simple where the user can know exactly what their options are on the app. 
+My idea is a social media app, somewhat similar to twitter or Facebook. A place where users can share thoughts and maybe even media with eachother. Something simple where the user can know exactly what their options are on the app, without a tutorial. I am a big fan of functionality and simplicity.
 
 
-MODELS
+## MODELS
 
-    Profile
+    - Profile
         full crud, tied to that users posts, goal of tied to that users likes and comments(stretch), notifications will be linked to a profile(stretch)
 
-    Post
+        -- Was able to set up the profile model and likes + comments
+        -- No notifications as of now
+
+
+    - Post
         create/read/delete, tied to posting user and following users?(stretch), will trigger notifications when interacted with(stretch)
 
-    Message(stretch)
+        -- Posts are fully functional
+        -- No notifications
+
+
+    - Message(stretch)
         create/read/delete, tied from one profile to another
 
-    Notification(stretch)
+        -- No messaging system implemented yet
+
+    - Notification(stretch)
         read, will be tied to interactions with posts and sent to that users profile
+
+        -- No notifications as of now
+
+
 
 
 - Table of Required Routes
@@ -59,39 +88,75 @@ MODELS
     |       **URL**        | **HTTP Verb** | **CRUD Action** |         **View**        |
     | -------------------- | ------------- | --------------- | ----------------------- |
     | /                    | GET           | read            | home                    |
-    | /profile/:id         | GET           | read            | viewprofile             |
-    | /profile/:id/likes   | GET           | read            | likes                   |
-    | /profile/:id/comments| GET           | read            | viewprofile             |
+    | /about               | GET           | read            | about                   |
+    | /profile/:id         | GET           | read            | view_profile            |
     | /profile/:id/edit    | PUT           | update          | editprofile             |
     | /profile/:id/delete  | DELETE        | delete          | deleteprofile           |
-    | /createprofile       | POST          | create          | createprofile           |
+    | /accounts/signup     | POST          | create          | registration/signup     |
+    | /profile_list/:id    | GET           | read            | profile_list            |
+    | /viewpost            | GET           | read            | view_post               |
+    | /post                | POST          | create          | Createpost              |
+    | /deletepost/:id      | DELETE        | delete          | delete_post             |
+    | /explore             | GET           | read            | explore                 |
+    | /dashboard           | GET           | read            | dashboard               |
+    | /view_comment/:id    | GET           | read            | vie_comment             |
+    |                           Not Implemented Yet!!!                                 |
     | /notifications       | GET           | read            | notifications           |
     | /messages            | GET           | read            | messages                |
-    | /viewpost            | GET           | read            | viewpost                |
-    | /createpost          | POST          | create          | home/profile/createpost |
-    | /deletepost/:id      | DELETE        | delete          | viewpost                |
-    | /explore             | GET           | read            | explore                 |
-    | /deletepost/:id      | DELETE        | delete          | viewpost                |
 
 
 ## STACK
 
-Will be created using Django and Postgres
-Failed to implement motion ui with django and switched to tailwind and flowbite with django
+- Was created using Django and Postgresql
+- - Database hosted on bit.io
+- Failed to implement motion ui with django and switched to tailwind and flowbite with django for the css
+
 
 ## MVP GOALS
 
-Home page with a main feed with users posts
-A profile page that shows all of that profile's content
-Authentication that is necessary to interact with others, create an account
-Option to like and comment on other user's content
+- Home page with a main feed with users posts
+- - Accomplished
+- A profile page that shows all of that profile's content
+- - Accomplished
+- Authentication that is necessary to interact with others, create an account
+- - Accomplished
+- Option to like and comment on other user's content
+- - Accomplished
 
 ## STRETCH GOALS
 
-Search option on nav that lets you search for other accounts, and even other posts
-The option to follow users to receive their content on your page instead of general content, and move the universal content to an explore page
-Add a notifications section for when people interact with your content
-Add an option for direct messages from others
-Have an option to view posts you have commented on or liked from your profile page
-Various filter options for explore and viewing on main/profile pages
-The ability for users to customize their view of the app
+- Search option on nav that lets you search for other accounts, and even other posts
+- - In Progress!
+- The option to follow users to receive their content on your page instead of general content, and move the universal content to an explore page
+- - Accomplished
+- Add a notifications section for when people interact with your content
+- - In progress!
+- Add an option for direct messages from others
+- - In progress!
+- Have an option to view posts you have commented on or liked from your profile page
+- - In progress!
+- Various filter options for explore and viewing on main/profile pages
+- - In progress!
+- The ability for users to customize their view of the app
+- - In progress!
+
+
+## Key Takeaways
+
+### Motion UI
+- Motion UI doesn't have much documentation for use with Django. I decided to go a different route because I was not only new to Django when starting this project, I had never even touched Motion UI.
+
+### Tailwind
+- I chose to learn Tailwind instead of Motion UI because it has Django documentation that is easily accessible. Tailwind is great and very easy to use. Very similar to Bootstrap. There are a few snags regarding installing tailwind in an existing Django app that I had to do a couple extra steps to resolve
+
+### Flowbite
+- Flowbite is a library that I used for Tailwind. It extends its usage and functionality. I am a huge fan of it but I felt like there was a little more I expected and it seems that there are some known issues that users run into.
+
+### Bulma
+- Bulma seems to be the go to css framework to use with Django according to my research and I wish I would've went that route. When i stumbled upon Bulma I already had Tailwind going full speed in my project. If I start another Django project, I will go that route
+
+### Django built-in Auth
+- Django has some very handy built in features but changing them is fairly difficult. Overall, I found Django to be easier than express as far as authentication goes.
+
+### Postgres
+- Postgres is very easy to use and I prefer it over my experiences with MongoDB
