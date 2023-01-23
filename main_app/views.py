@@ -93,9 +93,9 @@ def view_post(request, pk):
 # View for deleting a post
 @login_required
 def delete_post(request, pk):
-
     post = Post.objects.get(pk=pk)
-    if request.method == "PUT":
+    if request.method == "POST":
+        print('here')
         post.delete()
         return redirect('main_app:view_profile', pk=request.user.profile.id)
 
