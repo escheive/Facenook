@@ -2,14 +2,14 @@
 
 {% block content %}
 
-	<div class="container mx-auto pb-8">
+	<div class="pb-8">
 	
 		<section class="flex justify-center mb-8">
 			<h1 class="text-5xl">Your Feed ❤️</h1>
 		</section>
-		<form method="post" class="flex justify-center">
+		<form method="post" class="flex justify-center mx-auto md:w-1/2">
 			{% csrf_token %}
-			<div class="w-1/2 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+			<div class="border sm:w-screen grow border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
 				<div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
 					{{ form.as_p }}
 				</div>
@@ -22,7 +22,7 @@
 		</form>
         {% for post in posts %}
         <div class="flex justify-center">
-            <a href="{% url 'main_app:view_post' post.id %}" class="block w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            <a href="{% url 'main_app:view_post' post.id %}" class="block md:w-1/2 w-screen p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
                 <div class="font-bold text-xl mb-2">
 					<span class="mr-2 text-lg"> {{ post.user.username|capfirst }} </span> 
 					<span class="text-base"> {{ post.created_at }} </span>
