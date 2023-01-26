@@ -8,22 +8,31 @@
     <h2> {{ profile.user.first_name }} {{ profile.user.last_name }}</h2>
     <h2> {{ profile.user.email }}</h2>
     <a href="/delete_profile/{{ profile.id }}"><button type="button" formmethod="delete" class="text-white bg-red-600 border border-red-800 hover:text-white hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Delete</button></a>
+    <form method="post" class="">
+        {% csrf_token %}
+        <div class="mb-6">
+            {{ form }}
+        </div>
+        <button type="submit" class="mt-2 text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Save Changes</button>
+    </form>
 </div>
 
 <div class="py-4 grid gap-0 grid-cols-4">
 
-    <div class="col-span-1">
-
-        <form method="post" class="">
-            {% csrf_token %}
-            <div class="mb-6">
-                {{ form }}
-            </div>
-            <button type="submit" class="mt-2 text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800">Save Changes</button>
-        </form>
+    <div class="grid col-span-1 w-full bg-gray-50 table-auto text-center text-gray-500 dark:text-gray-400">
+        <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+            <p scope="col" class="bg-gray-50 border-b-4 rounded-none text-xs md:text-lg py-2 space-y-3">
+                Followers
+            </p>
+            <ul class="py-3">
+            {% for follower in profile.followed_by.all %}
+                <li class="group text-xs md:text-sm mx-auto rounded-lg py-2 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
     </div>
 
-    <div class="col-span-2 gap-0">
+    <div class="col-span-2">
         {% for post in user_posts %}
         <div class="flex grow justify-center">
             <a href="{% url 'main_app:view_post' post.id %}" class="block w-full p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
@@ -47,37 +56,18 @@
         </div>
         {% endfor %}
     </div>
-    <div class="relative h-fit flex overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full table-auto text-sm text-center text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 bg-gray-50 py-4 rounded-l-lg p-6 space-y-3">
-                        Followers
-                    </th>
-                    <th scope="col" class="px-6 bg-gray-50 py-4 rounded-r-lg p-6 space-y-3">
-                        Following
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 bg-gray-50 dark:hover:bg-gray-600">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <ul class="px-6 py-3">
-                            {% for follower in profile.followed_by.all %}
-                            <li class="group mx-auto rounded-lg p-6 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' follower.id %}" aria-current="true"> {{ follower }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </th>
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <ul class="px-6 py-3">
-                            {% for following in profile.follows.all %}
-                            <li class="group mx-auto rounded-lg p-6 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </th>
-                </tr>
-            </tbody>
-        </table>
+
+    <div class="grid col-span-1 w-full bg-gray-50 table-auto text-center text-gray-500 dark:text-gray-400">
+        <div class="text-gray-700 uppercase dark:bg-gray-700 dark:text-gray-400">
+            <p scope="col" class="border-b-4 text-xs md:text-lg bg-gray-50 py-2 space-y-3">
+                Following
+            </p>
+            <ul class="py-3">
+            {% for following in profile.follows.all %}
+                <li class="group text-xs md:text-sm mx-auto rounded-lg py-2 space-y-3 hover:bg-gray-200 hover:ring-sky-500"><a href="{% url 'main_app:view_profile' following.id %}" aria-current="true"> {{ following }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
     </div>
 </div>
 
