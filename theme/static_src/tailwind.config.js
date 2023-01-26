@@ -54,6 +54,9 @@ module.exports = {
             screens: {
                 xs: '300px'
             },
+            minWidth: {
+                '1/2': '50%'
+            },
             fontFamily: {
                 'body': [
                 'Inter', 
