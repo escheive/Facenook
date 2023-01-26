@@ -4,8 +4,8 @@
 
 <div class="pb-16">
     {% for profile in profiles %}
-		<div class="flex justify-center min-w-1/2">
-			<a href="{% url 'main_app:view_profile' profile.id %}" class="text-center block min-w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+		<div class="flex justify-center">
+			<a href="{% url 'main_app:view_profile' profile.id %}" class="text-center block w-screen md:w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 					<div class="font-bold text-xl mb-2"> {{ profile.user.username }}</div>
 					<p class="text-gray-700 text-base">
 						@{{ profile.user.username|lower }}
