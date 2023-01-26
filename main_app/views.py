@@ -193,7 +193,7 @@ def edit_profile(request, pk):
 def delete_profile(request, pk):
 
     # grab the profile from the database
-    profile = Profile.objects.get(user=request.user)
+    profile = Profile.objects.get(pk=pk)
 
     if request.method == "POST":
         # grab the user
@@ -205,7 +205,7 @@ def delete_profile(request, pk):
         # redirect back to the home page
         return redirect('main_app:home')
 
-    return render(request, 'delete_profile.html')
+    return render(request, 'delete_profile.html', {"profile": profile})
 
 
 
