@@ -2,14 +2,14 @@
 
 {% block content %}
 
-	<div class="container mx-auto pb-16">
+	<div class="pb-16">
 	
 		<section class="flex justify-center mb-8">
 			<h1 class="text-5xl">Explore ❤️</h1>
 		</section>
-		<form method="post" class="flex justify-center">
+		<form method="post" class="flex justify-center mx-auto md:w-1/2 sm:w-screen">
 			{% csrf_token %}
-			<div class="w-1/2 grow border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+			<div class="sm:w-screen grow border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
 				<div class="px-4 py-2 bg-white rounded-t-lg dark:bg-gray-800">
 					{{ form.as_p }}
 				</div>
@@ -21,8 +21,8 @@
 			</div>
 		</form>
 		{% for post in posts %}
-		<div class="flex justify-center w-full grow">
-			<a href="{% url 'main_app:view_post' post.id %}" class="block sm:w-full md:w-1/2 p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+		<div class="flex justify-center">
+			<a href="{% url 'main_app:view_post' post.id %}" class="block md:w-1/2 w-screen p-6 bg-white border border-gray-200 rounded-lg shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
 				<div class="font-bold text-xl mb-2">
 					<span class="mr-2 text-lg"> {{ post.user.username|capfirst }} </span> 
 					<span class="text-base"> {{ post.created_at }} </span>
