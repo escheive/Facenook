@@ -49,7 +49,10 @@ module.exports = {
        './node_modules/flowbite/**/*.js',
     ],
     safelist: [
-        'md:w-1/2'
+        'md:w-1/2',
+        'sm:w-screen',
+        'w-screen',
+        'w-1/2',
     ],
     darkMode: 'class',
     theme: {
