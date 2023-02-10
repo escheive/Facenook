@@ -48,6 +48,9 @@ module.exports = {
         */
        './node_modules/flowbite/**/*.js',
     ],
+    safelist: [
+        'md:w-1/2'
+    ],
     darkMode: 'class',
     theme: {
         extend: {
