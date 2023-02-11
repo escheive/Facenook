@@ -18,6 +18,9 @@
 - I ran into problems with styling Django default forms and models but overcame those hurdles.
 - I ran into quite a few problmes with Tailwind, will probably opt for Bulma next time around
 
+## Resolved Problems
+- During my initial deployment, I ran into an issue that wouldn't let me deploy. I followed a suggestion online that blamed collectstatic and said to disable collectstatic. I did so that I could reach mvp in time. After mvp I could not get Tailwind to function properly, re enabling collectstatic fixed the problem and I was able to deploy with it enabled. Not sure exactly what changed but problem is resolved.
+
 ## Citations
 
 ### Used tailwind for my primary css needs
