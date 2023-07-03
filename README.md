@@ -1,4 +1,5 @@
 
+## AS OF JULY 1, 2023, Bit.io, my Postgres DB provider has shutdown and I have not implemented another solution as of now so it is impossible to sign up or sign in. If you have any free solutions for postgresql, feel free to reach out to me. Thanks for your support.
 
 # Facenook
 ## By Erik Scheive
